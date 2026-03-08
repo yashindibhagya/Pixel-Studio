@@ -91,11 +91,11 @@ footer.ft {
 }
 
 .page-shell::before {
-  left: 9.25rem;
+  left: 4.25rem;
 }
 
 .page-shell::after {
-  right: 9.25rem;
+  right: 4.25rem;
 }
 
 @media (max-width: 1024px) {
