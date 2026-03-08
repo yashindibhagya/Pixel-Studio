@@ -3,545 +3,438 @@
 import Link from 'next/link'
 
 export function Hero() {
-  const sectionStyles = `
-        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap');
+  const styles = `
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap');
 
-        .ai-hero {
-          font-family: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-          min-height: 100vh;
-          background: #f4f4f4;
-          display: flex;
-          align-items: flex-start;
-          justify-content: center;
-          padding: 72px 24px 72px;
-          color: #111;
-          overflow: hidden;
-        }
+    :root {
+      --hero-bg: #0c0c0b;
+      --hero-ink: #f0ede6;
+      --hero-muted: rgba(240,237,230,0.38);
+      --hero-accent: #ff4d1c;
+      --hero-accent2: #ffb347;
+      --hero-border: rgba(240,237,230,0.09);
+    }
 
-        .ai-hero-inner {
-          max-width: 1180px;
-          width: 100%;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 56px;
-          align-items: stretch;
-        }
+    /* ─── RESET ─────────────────────────── */
+    .h-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Left content */
-        .ai-hero-label {
-          display: inline-flex;
-          align-items: center;
-          padding: 6px 14px;
-          border-radius: 999px;
-          background: #f0f0f0;
-          color: #111;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          margin-bottom: 22px;
-        }
+    /* ─── OUTER ─────────────────────────── */
+    .h-wrap {
+      font-family: 'Syne', sans-serif;
+      background: var(--hero-bg);
+      color: var(--hero-ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding-top: 72px; /* nav offset */
+      position: relative;
+    }
 
-        .ai-hero-heading {
-          font-size: clamp(46px, 6vw, 72px);
-          line-height: 1.02;
-          letter-spacing: -0.05em;
-          font-weight: 800;
-          margin: 0 0 18px;
-          color: #111111;
-        }
+    /* noise grain overlay */
+    .h-wrap::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .ai-hero-heading span.block {
-          display: block;
-        }
+    /* ─── TICKER ────────────────────────── */
+    .h-ticker {
+      border-top: 1px solid var(--hero-border);
+      border-bottom: 1px solid var(--hero-border);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 11px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .h-ticker-track {
+      display: inline-flex;
+      gap: 0;
+      animation: tickerSlide 28s linear infinite;
+    }
+    .h-ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 0 28px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--hero-muted);
+    }
+    .h-ticker-dot {
+      width: 4px; height: 4px;
+      background: var(--hero-accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    @keyframes tickerSlide {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
 
-        .ai-hero-heading-em {
-          position: relative;
-          display: inline-block;
-          z-index: 1;
-        }
+    /* ─── MAIN GRID ─────────────────────── */
+    .h-main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      grid-template-rows: auto 1fr;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
 
-        .ai-hero-heading-em::after {
-          content: '';
-          position: absolute;
-          inset: 62% -4px -8px;
-          background: linear-gradient(90deg, #ff4d4d, #ff9b3d);
-          border-radius: 999px;
-          z-index: -1;
-          opacity: 0.16;
-        }
+    /* ─── LEFT ──────────────────────────── */
+    .h-left {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      padding: 5vw 4vw 4vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--hero-border);
+      min-height: calc(100vh - 72px - 46px);
+    }
 
-        .ai-hero-sub {
-          max-width: 460px;
-          font-size: 15px;
-          line-height: 1.7;
-          color: #777777;
-          margin: 0 0 32px;
-        }
+    /* availability badge */
+    .h-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid var(--hero-border);
+      border-radius: 2px;
+      padding: 7px 14px;
+      width: fit-content;
+      margin-bottom: 3.5vw;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hero-muted);
+      animation: fadeUp 0.7s ease both;
+    }
+    .h-badge-dot {
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
+      50%      { box-shadow: 0 0 0 5px rgba(74,222,128,0); }
+    }
 
-        /* Buttons */
-        .ai-hero-actions {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          margin-bottom: 28px;
-          flex-wrap: wrap;
-        }
+    /* giant headline */
+    .h-headline {
+      font-size: clamp(4.2rem, 8.5vw, 9.5rem);
+      line-height: 0.91;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+      color: var(--hero-ink);
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .h-headline-em {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--hero-accent);
+      display: block;
+    }
+    .h-headline-ghost {
+      -webkit-text-stroke: 1px rgba(240,237,230,0.15);
+      color: transparent;
+      display: block;
+    }
 
-        .ai-hero-btn-primary,
-        .ai-hero-btn-ghost {
-          appearance: none;
-          border: none;
-          outline: none;
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: 500;
-          letter-spacing: 0.02em;
-          text-transform: none;
-          border-radius: 999px;
-          padding: 12px 22px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          text-decoration: none;
-          transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, color 0.16s ease;
-        }
+    /* bottom of left */
+    .h-left-foot {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-top: 3vw;
+      animation: fadeUp 0.7s 0.25s ease both;
+    }
 
-        .ai-hero-btn-primary {
-          background: #111111;
-          color: #ffffff;
-          box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
-          position: relative;
-          overflow: hidden;
-        }
+    .h-desc {
+      max-width: 380px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.85;
+      color: var(--hero-muted);
+      font-weight: 300;
+    }
+    .h-desc strong {
+      color: var(--hero-ink);
+      font-weight: 400;
+    }
 
-        .ai-hero-btn-primary:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 26px 50px rgba(255, 77, 77, 0.7);
-        }
+    /* CTA cluster */
+    .h-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+    .h-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--hero-accent);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 22px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .h-btn-primary:hover { background: #ff6b3d; transform: translateX(3px); }
+    .h-btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--hero-ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--hero-border);
+      padding-bottom: 4px;
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .h-btn-ghost:hover { border-color: var(--hero-accent); color: var(--hero-accent); }
 
-        .ai-hero-btn-ghost {
-          background: #ffffff;
-          color: #111111;
-          border: 1px solid rgba(0,0,0,0.08);
-          box-shadow: 0 10px 26px rgba(0,0,0,0.07);
-        }
+    /* ─── RIGHT ─────────────────────────── */
+    .h-right {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .ai-hero-btn-ghost:hover {
-          background: #ffffff;
-          transform: translateY(-1px);
-          box-shadow: 0 20px 32px rgba(0,0,0,0.16);
-        }
+    /* stats column */
+    .h-stats {
+      flex: 1;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      border-bottom: 1px solid var(--hero-border);
+    }
+    .h-stat {
+      padding: 2.5vw 2.2vw;
+      border-bottom: 1px solid var(--hero-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      animation: fadeUp 0.7s ease both;
+    }
+    .h-stat:last-child { border-bottom: none; }
+    .h-stat:nth-child(1) { animation-delay: 0.2s; }
+    .h-stat:nth-child(2) { animation-delay: 0.3s; }
+    .h-stat:nth-child(3) { animation-delay: 0.4s; }
+    .h-stat-num {
+      font-size: clamp(2.4rem, 4vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--hero-ink);
+      margin-bottom: 6px;
+    }
+    .h-stat-num span { color: var(--hero-accent); }
+    .h-stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hero-muted);
+    }
 
-        .ai-hero-btn-icon {
-          width: 26px;
-          height: 26px;
-          border-radius: 999px;
-          background: linear-gradient(135deg, #ff4b2b, #ff416c);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-size: 14px;
-        }
+    /* proof strip at bottom-right */
+    .h-proof {
+      padding: 1.8vw 2.2vw;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-top: 1px solid var(--hero-border);
+      animation: fadeUp 0.7s 0.45s ease both;
+    }
+    .h-avatars { display: flex; }
+    .h-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--hero-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .h-avatar + .h-avatar { margin-left: -8px; }
+    .h-av1 { background: linear-gradient(135deg, #ff4d1c, #ff9b3d); }
+    .h-av2 { background: linear-gradient(135deg, #38bdf8, #0ea5e9); }
+    .h-av3 { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+    .h-av4 { background: linear-gradient(135deg, #4ade80, #16a34a); }
+    .h-proof-text { display: flex; flex-direction: column; gap: 2px; }
+    .h-proof-stars { color: var(--hero-accent2); font-size: 11px; letter-spacing: 1px; }
+    .h-proof-main {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hero-ink);
+    }
+    .h-proof-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--hero-muted);
+    }
 
-        /* Social proof */
-        .ai-hero-proof {
-          display: inline-flex;
-          align-items: center;
-          gap: 14px;
-          padding: 10px 16px;
-          border-radius: 999px;
-          background: #ffffff;
-          border: 1px solid rgba(0,0,0,0.06);
-          box-shadow: 0 18px 38px rgba(0,0,0,0.12);
-        }
+    /* ─── SHARED ANIM ───────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-        .ai-hero-avatars {
-          display: flex;
-        }
+    /* ─── RESPONSIVE ────────────────────── */
+    @media (max-width: 900px) {
+      .h-main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .h-left {
+        grid-column: 1; grid-row: 1;
+        border-right: none;
+        border-bottom: 1px solid var(--hero-border);
+        min-height: unset;
+        padding: 6vw 5vw;
+      }
+      .h-right {
+        grid-column: 1; grid-row: 2;
+      }
+      .h-stats { grid-template-rows: unset; grid-template-columns: 1fr 1fr 1fr; }
+      .h-stat { border-bottom: none; border-right: 1px solid var(--hero-border); }
+      .h-stat:last-child { border-right: none; }
+      .h-headline { font-size: clamp(3rem, 10vw, 6rem); }
+      .h-actions { align-items: flex-start; }
+      .h-left-foot { flex-direction: column; align-items: flex-start; }
+    }
 
-        .ai-hero-avatar {
-          width: 32px;
-          height: 32px;
-          border-radius: 999px;
-          border: 2px solid #ffffff;
-          background: linear-gradient(135deg, #111, #333);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #f5f5f5;
-          font-size: 13px;
-          font-weight: 500;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
+    @media (max-width: 560px) {
+      .h-stats { grid-template-columns: 1fr 1fr; }
+      .h-stat:nth-child(2) { border-right: none; }
+      .h-stat:nth-child(3) { border-top: 1px solid var(--hero-border); border-right: 1px solid var(--hero-border); }
+      .h-headline { font-size: clamp(2.6rem, 12vw, 4rem); }
+      .h-left { padding: 8vw 5vw 6vw; }
+    }
+  `
 
-        .ai-hero-avatar + .ai-hero-avatar {
-          margin-left: -10px;
-        }
-
-        .ai-hero-proof-text {
-          display: flex;
-          flex-direction: column;
-          gap: 3px;
-        }
-
-        .ai-hero-stars {
-          color: #ff7a2f;
-          font-size: 14px;
-        }
-
-        .ai-hero-proof-main {
-          font-size: 12px;
-          font-weight: 600;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          color: #111;
-        }
-
-        .ai-hero-proof-sub {
-          font-size: 11px;
-          color: #777;
-        }
-
-        /* Right gallery – 4 columns = 4 images per row, infinite scroll */
-        .ai-hero-gallery {
-          display: flex;
-          gap: 10px;
-          height: 100%;
-          max-height: 560px;
-          min-height: 400px;
-          overflow: hidden;
-          width: 100%;
-          min-width: 0;
-          padding: 32px 0;
-          margin: -32px 0;
-        }
-
-        .ai-hero-column {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          flex: 1;
-          min-width: 0;
-          flex-shrink: 0;
-        }
-
-        .ai-hero-column--down {
-          animation: aiHeroScrollDown 20s linear infinite;
-        }
-
-        .ai-hero-column--up {
-          animation: aiHeroScrollUp 20s linear infinite;
-        }
-
-        .ai-hero-photo {
-          position: relative;
-          width: 100%;
-          border-radius: 22px;
-          overflow: hidden;
-          background-size: cover;
-          background-position: center;
-          box-shadow: 0 22px 45px rgba(0,0,0,0.45);
-          flex-shrink: 0;
-        }
-
-        .ai-hero-photo--tall {
-          height: 180px;
-        }
-
-        .ai-hero-photo--short {
-          height: 130px;
-        }
-
-        /* Gradient placeholders that mimic real shots */
-        .ai-hero-photo-1 {
-          background-image: linear-gradient(135deg, #f97316, #111827);
-        }
-        .ai-hero-photo-2 {
-          background-image: linear-gradient(135deg, #38bdf8, #020617);
-        }
-        .ai-hero-photo-3 {
-          background-image: linear-gradient(135deg, #facc15, #1f2937);
-        }
-        .ai-hero-photo-4 {
-          background-image: linear-gradient(135deg, #f97316, #0f172a);
-        }
-        .ai-hero-photo-5 {
-          background-image: linear-gradient(135deg, #4ade80, #111827);
-        }
-        .ai-hero-photo-6 {
-          background-image: linear-gradient(135deg, #f472b6, #020617);
-        }
-
-        .ai-hero-photo::after {
-          content: 'Dummy image';
-          position: absolute;
-          right: 14px;
-          bottom: 14px;
-          padding: 4px 9px;
-          border-radius: 999px;
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          background: rgba(0,0,0,0.66);
-          color: rgba(249,250,251,0.8);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(148,163,184,0.55);
-        }
-
-        /* Seamless infinite loop: when first set scrolls out, duplicate is in place so loop resets with no jump */
-        @keyframes aiHeroScrollDown {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(33.333%); }
-        }
-
-        @keyframes aiHeroScrollUp {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-33.333%); }
-        }
-
-        @media (max-width: 1280px) {
-          .ai-hero-inner {
-            gap: 48px;
-          }
-          .ai-hero-gallery {
-            max-height: 520px;
-            min-height: 380px;
-          }
-          .ai-hero-photo--tall { height: 200px; }
-          .ai-hero-photo--short { height: 150px; }
-        }
-
-        @media (max-width: 1024px) {
-          .ai-hero {
-            padding: 64px 20px 72px;
-          }
-          .ai-hero-inner {
-            grid-template-columns: minmax(0, 1.1fr);
-            gap: 40px;
-          }
-          .ai-hero-gallery {
-            margin-top: 40px;
-            max-height: 480px;
-            min-height: 340px;
-          }
-          .ai-hero-heading {
-            font-size: clamp(38px, 8vw, 52px);
-          }
-        }
-
-        @media (max-width: 768px) {
-          .ai-hero {
-            padding: 56px 18px 64px;
-          }
-          .ai-hero-inner {
-            gap: 32px;
-          }
-          .ai-hero-heading {
-            font-size: clamp(32px, 7vw, 42px);
-          }
-          .ai-hero-sub {
-            font-size: 14px;
-          }
-          .ai-hero-actions {
-            gap: 12px;
-            margin-bottom: 24px;
-          }
-          .ai-hero-gallery {
-            max-height: 420px;
-            min-height: 320px;
-            gap: 10px;
-          }
-          .ai-hero-photo--tall { height: 170px; }
-          .ai-hero-photo--short { height: 130px; }
-          .ai-hero-proof {
-            flex-wrap: wrap;
-            padding: 8px 12px;
-          }
-        }
-
-        @media (max-width: 640px) {
-          .ai-hero {
-            padding: 48px 16px 56px;
-          }
-          .ai-hero-inner {
-            gap: 28px;
-          }
-          .ai-hero-heading {
-            font-size: 34px;
-          }
-          .ai-hero-label {
-            font-size: 10px;
-            padding: 5px 12px;
-          }
-          .ai-hero-gallery {
-            max-height: 380px;
-            min-height: 280px;
-            gap: 8px;
-            margin-top: 28px;
-          }
-          .ai-hero-photo--tall { height: 150px; }
-          .ai-hero-photo--short { height: 110px; }
-          .ai-hero-avatars .ai-hero-avatar {
-            width: 28px;
-            height: 28px;
-            font-size: 11px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .ai-hero {
-            padding: 40px 14px 48px;
-          }
-          .ai-hero-heading {
-            font-size: 28px;
-          }
-          .ai-hero-sub {
-            font-size: 13px;
-            margin-bottom: 24px;
-          }
-          .ai-hero-actions {
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 20px;
-          }
-          .ai-hero-btn-primary,
-          .ai-hero-btn-ghost {
-            width: 100%;
-            justify-content: center;
-          }
-          .ai-hero-gallery {
-            max-height: 340px;
-            min-height: 260px;
-          }
-          .ai-hero-photo--tall { height: 130px; }
-          .ai-hero-photo--short { height: 95px; }
-          .ai-hero-proof-main {
-            font-size: 11px;
-          }
-          .ai-hero-proof-sub {
-            font-size: 10px;
-          }
-        }
-
-        @media (max-width: 380px) {
-          .ai-hero-heading {
-            font-size: 24px;
-          }
-          .ai-hero-gallery {
-            max-height: 280px;
-            min-height: 220px;
-          }
-          .ai-hero-photo--tall { height: 110px; }
-          .ai-hero-photo--short { height: 80px; }
-        }
-      `
+  const tickerItems = [
+    'Brand Identity', 'Web Design', 'UI/UX Systems', 'Motion & Animation',
+    'Product Design', 'Creative Direction', 'Design Subscriptions',
+  ]
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: sectionStyles }} />
+      <style dangerouslySetInnerHTML={{ __html: styles }} />
 
-      <section className="ai-hero">
-        <div className="ai-hero-inner">
-          {/* Left content */}
-          <div>
-            <div className="ai-hero-label">
-              <span>// AVAILABLE FOR PROJECTS //</span>
-            </div>
+      <section className="h-wrap">
 
-            <h1 className="ai-hero-heading">
-              <span className="block">World-Class</span>
-              <span className="block">Design Partner</span>
-              <span className="block">
-                For <span className="ai-hero-heading-em">AI Startups</span>
+        {/* ── TICKER ── */}
+        <div className="h-ticker">
+          <div className="h-ticker-track">
+            {[...tickerItems, ...tickerItems].map((item, i) => (
+              <span key={i} className="h-ticker-item">
+                <span className="h-ticker-dot" />
+                {item}
               </span>
-            </h1>
+            ))}
+          </div>
+        </div>
 
-            <p className="ai-hero-sub">
-              Design subscriptions for AI growing startup.
-            </p>
+        {/* ── MAIN GRID ── */}
+        <div className="h-main">
 
-            <div className="ai-hero-actions">
-              <Link href="#pricing" className="ai-hero-btn-primary">
-                <span>View Pricing</span>
-                <span className="ai-hero-btn-icon">↗</span>
-              </Link>
+          {/* LEFT */}
+          <div className="h-left">
+            <div>
+              <div className="h-badge">
+                <span className="h-badge-dot" />
+                Available for projects
+              </div>
 
-              <Link href="#contact" className="ai-hero-btn-ghost">
-                <span>Get in touch</span>
-                <span className="ai-hero-btn-icon">↗</span>
-              </Link>
+              <h1 className="h-headline">
+                World-Class
+                <span className="h-headline-em">Design</span>
+                <span className="h-headline-ghost">Partner.</span>
+              </h1>
             </div>
 
-            <div className="ai-hero-proof">
-              <div className="ai-hero-avatars">
-                <div className="ai-hero-avatar">A</div>
-                <div className="ai-hero-avatar">B</div>
-                <div className="ai-hero-avatar">C</div>
-                <div className="ai-hero-avatar">D</div>
-              </div>
-              <div className="ai-hero-proof-text">
-                <span className="ai-hero-stars">★★★★★</span>
-                <span className="ai-hero-proof-main">Trusted by 100+ businesses</span>
-                <span className="ai-hero-proof-sub">THEY HIT THEIR TARGETS — YOU'RE NEXT.</span>
+            <div className="h-left-foot">
+              <p className="h-desc">
+                <strong>Design subscriptions</strong> for AI-powered startups.<br />
+                Strategy, UI/UX, branding and motion — all in one flat monthly fee.
+                Ship faster. Look better. <strong>Grow with confidence.</strong>
+              </p>
+
+              <div className="h-actions">
+                <Link href="#pricing" className="h-btn-primary">
+                  View Pricing ↗
+                </Link>
+                <Link href="#contact" className="h-btn-ghost">
+                  Get in touch →
+                </Link>
               </div>
             </div>
           </div>
 
-          {/* Right side gallery – 4 images per row, seamless infinite loop (cols 1&3 down, 2&4 up) */}
-          <div className="ai-hero-gallery">
-            <div className="ai-hero-column ai-hero-column--down">
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-1" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-2" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-3" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-1" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-2" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-3" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-1" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-2" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-3" />
+          {/* RIGHT */}
+          <div className="h-right">
+            <div className="h-stats">
+              <div className="h-stat">
+                <div className="h-stat-num">120<span>+</span></div>
+                <div className="h-stat-label">Projects delivered</div>
+              </div>
+              <div className="h-stat">
+                <div className="h-stat-num">100<span>+</span></div>
+                <div className="h-stat-label">Happy clients</div>
+              </div>
+              <div className="h-stat">
+                <div className="h-stat-num">07<span>yrs</span></div>
+                <div className="h-stat-label">In the craft</div>
+              </div>
             </div>
 
-            <div className="ai-hero-column ai-hero-column--up">
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-4" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-5" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-6" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-4" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-5" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-6" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-4" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-5" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-6" />
-            </div>
-
-            <div className="ai-hero-column ai-hero-column--down">
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-1" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-2" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-3" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-1" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-2" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-3" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-1" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-2" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-3" />
-            </div>
-
-            <div className="ai-hero-column ai-hero-column--up">
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-4" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-5" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-6" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-4" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-5" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-6" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-4" />
-              <div className="ai-hero-photo ai-hero-photo--tall ai-hero-photo-5" />
-              <div className="ai-hero-photo ai-hero-photo--short ai-hero-photo-6" />
+            <div className="h-proof">
+              <div className="h-avatars">
+                <div className="h-avatar h-av1">A</div>
+                <div className="h-avatar h-av2">B</div>
+                <div className="h-avatar h-av3">C</div>
+                <div className="h-avatar h-av4">D</div>
+              </div>
+              <div className="h-proof-text">
+                <span className="h-proof-stars">★★★★★</span>
+                <span className="h-proof-main">Trusted by 100+ businesses</span>
+                <span className="h-proof-sub">They hit their targets — you're next.</span>
+              </div>
             </div>
           </div>
+
         </div>
       </section>
     </>
