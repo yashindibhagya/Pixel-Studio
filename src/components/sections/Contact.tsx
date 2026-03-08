@@ -308,17 +308,70 @@ export function Contact() {
         }
 
         @media (max-width: 1024px) {
-          .contact-section { padding: 80px 14px 96px; }
-          .contact-shell { grid-template-columns: 1fr; }
-          .contact-left { min-height: auto; }
+          .contact-section {
+            padding: 80px 14px 96px;
+          }
+          .contact-shell {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          .contact-left {
+            min-height: auto;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .contact-section {
+            padding: 64px 12px 80px;
+          }
+          .contact-heading {
+            font-size: clamp(32px, 6vw, 42px);
+          }
         }
 
         @media (max-width: 640px) {
-          .contact-cards { grid-template-columns: 1fr; }
-          .contact-form-row { grid-template-columns: 1fr; }
-          .contact-pricing-options { grid-template-columns: 1fr; }
-          .contact-left { padding: 28px 22px; }
-          .contact-right { padding: 28px 22px; }
+          .contact-section {
+            padding: 56px 12px 72px;
+          }
+          .contact-cards {
+            grid-template-columns: 1fr;
+            margin-top: 24px;
+          }
+          .contact-form-row {
+            grid-template-columns: 1fr;
+          }
+          .contact-pricing-options {
+            grid-template-columns: 1fr;
+          }
+          .contact-left {
+            padding: 28px 22px;
+          }
+          .contact-right {
+            padding: 28px 22px;
+          }
+          .contact-heading {
+            font-size: 30px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-section {
+            padding: 48px 10px 64px;
+          }
+          .contact-label {
+            font-size: 10px;
+            padding: 6px 12px;
+          }
+          .contact-heading {
+            font-size: 26px;
+          }
+          .contact-left,
+          .contact-right {
+            padding: 22px 18px;
+          }
+          .contact-form-title {
+            font-size: 16px;
+          }
         }
       `
 

@@ -170,21 +170,72 @@ export function Benefits() {
           margin: 0;
         }
 
+        @media (max-width: 1280px) {
+          .benefits-grid {
+            gap: 14px;
+          }
+        }
+
         @media (max-width: 1024px) {
           .benefits-section {
             padding: 80px 14px 96px;
           }
           .benefits-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .benefits-section {
+            padding: 64px 12px 80px;
+          }
+          .benefits-header {
+            gap: 24px;
+            margin-bottom: 28px;
+          }
+          .benefits-title {
+            font-size: clamp(36px, 8vw, 48px);
           }
         }
 
         @media (max-width: 640px) {
+          .benefits-section {
+            padding: 56px 12px 72px;
+          }
           .benefits-header {
             flex-direction: column;
+            gap: 20px;
+            margin-bottom: 24px;
+          }
+          .benefits-title {
+            font-size: 32px;
+          }
+          .benefits-intro {
+            max-width: 100%;
           }
           .benefits-grid {
             grid-template-columns: 1fr;
+            gap: 12px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .benefits-section {
+            padding: 48px 10px 64px;
+          }
+          .benefits-label {
+            font-size: 10px;
+            padding: 6px 12px;
+          }
+          .benefits-title {
+            font-size: 28px;
+          }
+          .benefit-card {
+            padding: 16px 16px 18px;
+          }
+          .benefit-title {
+            font-size: 15px;
           }
         }
       `

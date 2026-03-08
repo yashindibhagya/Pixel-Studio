@@ -344,10 +344,30 @@ export function Process() {
           
 
         /* Responsive */
+        @media (max-width: 1024px) {
+          .hiw-section {
+            padding: 80px 20px 100px;
+          }
+          .hiw-cards-wrapper {
+            gap: 32px;
+            margin-top: 80px;
+          }
+        }
+
         @media (max-width: 768px) {
+          .hiw-section {
+            padding: 64px 18px 80px;
+          }
+          .hiw-header {
+            margin-bottom: 40px;
+          }
+          .hiw-heading {
+            font-size: clamp(34px, 7vw, 44px);
+          }
           .hiw-cards-wrapper {
             grid-template-columns: 1fr;
             gap: 16px;
+            margin-top: 48px;
           }
           .step-card {
             margin-top: 0 !important;
@@ -361,12 +381,34 @@ export function Process() {
           }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
           .hiw-section {
-            padding: 64px 16px 80px;
+            padding: 56px 16px 72px;
           }
           .hiw-heading {
-            font-size: 36px;
+            font-size: 32px;
+          }
+          .step-title {
+            font-size: clamp(18px, 4vw, 22px);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hiw-section {
+            padding: 48px 14px 64px;
+          }
+          .hiw-heading {
+            font-size: 28px;
+          }
+          .hiw-label {
+            font-size: 12px;
+            padding: 4px 12px;
+          }
+          .card-inner {
+            padding: 20px 18px;
+          }
+          .step-description {
+            font-size: 13px;
           }
         }
       `

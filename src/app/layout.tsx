@@ -1,8 +1,14 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import { Header } from '@/components/new/Header'
+import { Header } from '@/components/sections/Header'
 import { Cursor } from '@/components/Cursor'
 import { ThemeProvider } from '@/components/ThemeProvider'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+}
 
 export const metadata: Metadata = {
   title: 'Pixel.Studio | We Build Digital Products That Grow',
@@ -19,7 +25,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var t=localStorage.getItem('devolabs-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);else if(window.matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.setAttribute('data-theme','light');})();`,
+            __html: `document.documentElement.setAttribute('data-theme','light');`,
           }}
         />
       </head>

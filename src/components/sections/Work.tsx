@@ -290,6 +290,12 @@ export function Work() {
           height: 100%;
         }
 
+        @media (max-width: 1280px) {
+          .case-title {
+            font-size: clamp(26px, 3vw, 38px);
+          }
+        }
+
         @media (max-width: 1024px) {
           .work-section {
             padding: 80px 14px 96px;
@@ -315,9 +321,37 @@ export function Work() {
           }
         }
 
+        @media (max-width: 768px) {
+          .work-section {
+            padding: 64px 12px 80px;
+          }
+          .work-header {
+            gap: 24px;
+          }
+          .work-title {
+            font-size: clamp(32px, 7vw, 42px);
+          }
+          .case-index {
+            min-width: 40px;
+            padding: 24px 0;
+            font-size: 10px;
+          }
+        }
+
         @media (max-width: 640px) {
+          .work-section {
+            padding: 56px 12px 72px;
+          }
           .work-header {
             flex-direction: column;
+            gap: 20px;
+            margin-bottom: 28px;
+          }
+          .work-title {
+            font-size: 32px;
+          }
+          .work-intro {
+            max-width: 100%;
           }
           .case-card {
             grid-template-columns: 36px 1fr;
@@ -325,8 +359,38 @@ export function Work() {
           .case-body {
             padding: 20px 16px;
           }
+          .case-title {
+            font-size: 26px;
+          }
           .case-right {
             padding: 12px 16px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .work-section {
+            padding: 48px 10px 64px;
+          }
+          .work-label {
+            font-size: 10px;
+            padding: 6px 12px;
+          }
+          .work-title {
+            font-size: 28px;
+          }
+          .case-index {
+            min-width: 32px;
+            padding: 20px 0;
+            font-size: 10px;
+          }
+          .case-body {
+            padding: 18px 14px;
+          }
+          .case-title {
+            font-size: 22px;
+          }
+          .case-summary {
+            font-size: 12px;
           }
         }
       `

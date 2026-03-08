@@ -328,10 +328,53 @@ export function FAQ() {
           }
         }
 
+        @media (max-width: 768px) {
+          .faq-section {
+            padding: 64px 12px 80px;
+          }
+          .faq-section .work-title {
+            font-size: clamp(34px, 7vw, 44px);
+          }
+          .faq-body {
+            margin-bottom: 24px;
+          }
+        }
+
         @media (max-width: 640px) {
+          .faq-section {
+            padding: 56px 12px 72px;
+          }
+          .faq-container {
+            gap: 32px;
+          }
+          .faq-section .work-title {
+            font-size: 30px;
+          }
+          .faq-question {
+            font-size: 14px;
+          }
           .faq-actions {
             flex-direction: column;
             align-items: flex-start;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .faq-section {
+            padding: 48px 10px 64px;
+          }
+          .faq-section .work-label {
+            font-size: 10px;
+            padding: 6px 12px;
+          }
+          .faq-section .work-title {
+            font-size: 26px;
+          }
+          .faq-item-header {
+            padding: 16px 18px;
+          }
+          .faq-answer {
+            padding: 12px 18px 16px;
           }
         }
       `
