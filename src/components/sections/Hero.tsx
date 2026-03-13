@@ -7,12 +7,12 @@ export function Hero() {
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap');
 
     :root {
-      --hero-bg: #0c0c0b;
-      --hero-ink: #f0ede6;
-      --hero-muted: rgba(240,237,230,0.38);
+      --hero-bg: #f9f5ee;
+      --hero-ink: #18130c;
+      --hero-muted: rgba(24,19,12,0.55);
       --hero-accent: #ff4d1c;
       --hero-accent2: #ffb347;
-      --hero-border: rgba(240,237,230,0.09);
+      --hero-border: rgba(24,19,12,0.12);
     }
 
     /* ─── RESET ─────────────────────────── */
@@ -147,7 +147,7 @@ export function Hero() {
       display: block;
     }
     .h-headline-ghost {
-      -webkit-text-stroke: 1px rgba(240,237,230,0.15);
+      -webkit-text-stroke: 1px rgba(24,19,12,0.18);
       color: transparent;
       display: block;
     }

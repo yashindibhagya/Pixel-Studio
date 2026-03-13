@@ -33,8 +33,9 @@ export function Cursor({ children }: { children: React.ReactNode }) {
     window.addEventListener('mousemove', handleMouseMove)
 
     const animateRing = () => {
-      ringPos.current.x += (ringTarget.current.x - ringPos.current.x) * 0.12
-      ringPos.current.y += (ringTarget.current.y - ringPos.current.y) * 0.12
+      const factor = 0.3
+      ringPos.current.x += (ringTarget.current.x - ringPos.current.x) * factor
+      ringPos.current.y += (ringTarget.current.y - ringPos.current.y) * factor
       setRing({ x: ringPos.current.x, y: ringPos.current.y })
       rafRef.current = requestAnimationFrame(animateRing)
     }

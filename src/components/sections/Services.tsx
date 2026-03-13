@@ -5,322 +5,372 @@ import { useCursorHover } from '@/components/Cursor'
 const services = [
   {
     id: 'ui-ux',
+    num: '01',
     title: 'UI/UX Design',
-    description: 'Elevate your identity: sharp positioning, cohesive visuals, real impact.',
+    description: 'Elevate your identity with sharp positioning, cohesive visuals, and interfaces that convert visitors into loyal users.',
     tags: ['Art Direction', 'Brand Strategy', 'Logo Design', 'Color Systems'],
+    gradient: 'linear-gradient(135deg, #ff4d1c 0%, #1a0a06 60%, #0c0c0b 100%)',
   },
   {
     id: 'web-development',
+    num: '02',
     title: 'Web Development',
-    description: 'Refresh or rebrand your UX. High retention with clear flows and micro‑interactions.',
+    description: 'Refresh or rebuild your web presence. High retention with pixel-perfect flows, micro‑interactions, and clean architecture.',
     tags: ['Clean & Modern UI', 'Rebranding', 'Design Systems', 'Prototyping'],
+    gradient: 'linear-gradient(135deg, #38bdf8 0%, #0c1a2e 60%, #0c0c0b 100%)',
   },
   {
     id: 'mobile-development',
+    num: '03',
     title: 'Mobile Development',
-    description: 'Launch a revenue‑driving site that captures qualified leads 24/7 — shipped in 14 days or less.',
-    tags: ['Framer Dev', 'Integrations', 'CMS Integration', 'Animation'],
+    description: 'Launch a revenue‑driving app that captures qualified leads 24/7 — designed, developed, and shipped in 14 days or less.',
+    tags: ['React Native', 'Integrations', 'CMS', 'Animation'],
+    gradient: 'linear-gradient(135deg, #a78bfa 0%, #1a0c2e 60%, #0c0c0b 100%)',
   },
 ]
-
-function FolderIcon() {
-  return (
-    <svg
-      viewBox="0 0 40 32"
-      aria-hidden="true"
-      className="services-folder-icon"
-    >
-      <path
-        d="M3 8.5C3 7.12 4.12 6 5.5 6h8.2c.7 0 1.37.3 1.83.81l1.94 2.14H34c1.1 0 2 .9 2 2v11.5A3.5 3.5 0 0 1 32.5 26h-23A3.5 3.5 0 0 1 6 22.5V11"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
 
 export function Services() {
   const hover = useCursorHover()
 
-  const sectionStyles = `
-        .services-section {
-          background: #f4f4f4;
-          padding: 96px 16px 120px;
-          display: flex;
-          justify-content: center;
-        }
+  const styles = `
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap');
 
-        .services-container {
-          max-width: 1280px;
-          width: 100%;
-          margin: 0 auto;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-        }
+    :root {
+      --sv-bg: #f9f5ee;
+      --sv-ink: #18130c;
+      --sv-muted: rgba(24,19,12,0.55);
+      --sv-accent: #ff4d1c;
+      --sv-border: rgba(24,19,12,0.12);
+    }
 
-        .services-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          gap: 32px;
-          margin-bottom: 40px;
-        }
+    .sv-section {
+      font-family: 'Syne', sans-serif;
+      background: var(--sv-bg);
+      color: var(--sv-ink);
+      padding: 0 0 120px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .services-label {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 8px 14px;
-          border-radius: 999px;
-          background: #111;
-          color: #ffffff;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          margin-bottom: 12px;
-        }
+    /* grain */
+    .sv-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .services-label .label-slashes {
-          color: var(--accent);
-        }
+    .sv-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 4vw;
+      position: relative;
+      z-index: 1;
+    }
 
-        .services-title {
-          font-size: clamp(46px, 6vw, 62px);
-          font-weight: 800;
-          letter-spacing: -0.04em;
-          margin: 0;
-          color: #111;
-        }
+    /* ── HEADER ── */
+    .sv-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 32px;
+      padding: 80px 0 56px;
+      border-bottom: 1px solid var(--sv-border);
+      margin-bottom: 56px;
+    }
 
-        .services-title span.period {
-          color: #ff4d4d;
-        }
+    .sv-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sv-muted);
+      margin-bottom: 18px;
+    }
+    .sv-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--sv-accent);
+    }
 
-        .services-intro {
-          max-width: 360px;
-          font-size: 14px;
-          line-height: 1.7;
-          color: #6b6b6b;
-        }
+    .sv-title {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--sv-ink);
+      margin: 0;
+    }
+    .sv-title-em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--sv-accent);
+    }
 
-        .services-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 18px;
-        }
+    .sv-intro {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.85;
+      color: var(--sv-muted);
+      font-weight: 300;
+      max-width: 400px;
+      align-self: end;
+    }
 
-        .services-card {
-          background: #ffffff;
-          border-radius: 22px;
-          padding: 18px 18px 20px;
-          box-shadow: 0 14px 34px rgba(0,0,0,0.10);
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
+    /* ── GRID ── */
+    .sv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--sv-border);
+      border: 1px solid var(--sv-border);
+    }
 
-        .services-card-top {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          min-height: 200px;
-        }
+    /* ── CARD ── */
+    .sv-card {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .sv-card:hover { background: #f2ebe1; }
 
-        .services-folder-icon {
-          width: 26px;
-          height: 20px;
-          color: #111;
-        }
+    /* top meta row */
+    .sv-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 0;
+    }
+    .sv-card-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: var(--sv-muted);
+    }
+    .sv-card-arrow {
+      width: 28px; height: 28px;
+      border: 1px solid var(--sv-border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      color: var(--sv-muted);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .sv-card:hover .sv-card-arrow {
+      border-color: var(--sv-accent);
+      color: var(--sv-accent);
+      transform: rotate(45deg);
+    }
 
-        .services-card-title {
-          font-size: 18px;
-          font-weight: 700;
-          letter-spacing: -0.03em;
-          color: #111;
-        }
+    /* image */
+    .sv-card-media {
+      margin: 18px 24px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 200px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .sv-card-media-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
+    }
+    .sv-card:hover .sv-card-media-bg { transform: scale(1.04); }
+    .sv-card-media-label {
+      position: absolute;
+      left: 12px; bottom: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.72);
+      color: rgba(249,250,251,0.8);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(156,163,175,0.35);
+      backdrop-filter: blur(6px);
+    }
 
-        .services-card-desc {
-          font-size: 13px;
-          line-height: 1.7;
-          color: #777;
-          margin: 0;
-        }
+    /* content */
+    .sv-card-body {
+      padding: 20px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .sv-card-title {
+      font-size: clamp(1.3rem, 2vw, 1.65rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--sv-ink);
+      margin-bottom: 10px;
+    }
+    .sv-card-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      line-height: 1.8;
+      color: var(--sv-muted);
+      font-weight: 300;
+      flex: 1;
+      margin-bottom: 20px;
+    }
 
-        .services-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-          margin-top: 4px;
-        }
+    /* tags */
+    .sv-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding-top: 16px;
+      border-top: 1px solid var(--sv-border);
+    }
+    .sv-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border: 1px solid var(--sv-border);
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sv-muted);
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .sv-card:hover .sv-tag {
+      border-color: rgba(255,77,28,0.25);
+      color: rgba(24,19,12,0.8);
+    }
 
-        .services-tag {
-          display: inline-flex;
-          align-items: center;
-          padding: 5px 11px;
-          border-radius: 999px;
-          border: 1px solid #e4e4e4;
-          background: #fafafa;
-          font-size: 11px;
-          font-weight: 500;
-          color: #444;
-          white-space: nowrap;
-        }
+    /* ── FOOTER STRIP ── */
+    .sv-footer {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--sv-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .sv-footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sv-muted);
+    }
+    .sv-footer-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--sv-accent);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .sv-footer-cta:hover { background: #ff6b3d; transform: translateX(3px); }
 
-        .services-card-media {
-          margin-top: 6px;
-          border-radius: 18px;
-          overflow: hidden;
-          background: radial-gradient(circle at top left, #f97316 0, #111827 55%, #020617 100%);
-          position: relative;
-          min-height: 350px;
-        }
-
-        .services-card-media::after {
-          content: 'Dummy image';
-          position: absolute;
-          left: 14px;
-          bottom: 14px;
-          padding: 4px 10px;
-          border-radius: 999px;
-          background: rgba(0,0,0,0.72);
-          color: rgba(249,250,251,0.9);
-          font-size: 11px;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          border: 1px solid rgba(156,163,175,0.6);
-        }
-
-        @media (max-width: 1280px) {
-          .services-grid {
-            gap: 16px;
-          }
-          .services-card-media {
-            min-height: 300px;
-          }
-        }
-
-        @media (max-width: 1024px) {
-          .services-section {
-            padding: 80px 14px 96px;
-          }
-          .services-grid {
-            grid-template-columns: 1fr;
-            gap: 18px;
-          }
-          .services-card-media {
-            min-height: 280px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .services-section {
-            padding: 64px 12px 80px;
-          }
-          .services-header {
-            gap: 24px;
-            margin-bottom: 32px;
-          }
-          .services-title {
-            font-size: clamp(36px, 8vw, 48px);
-          }
-          .services-card-media {
-            min-height: 260px;
-          }
-        }
-
-        @media (max-width: 640px) {
-          .services-section {
-            padding: 56px 12px 72px;
-          }
-          .services-header {
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 28px;
-          }
-          .services-title {
-            font-size: 32px;
-          }
-          .services-intro {
-            max-width: 100%;
-          }
-          .services-card {
-            padding: 16px 16px 18px;
-          }
-          .services-card-media {
-            min-height: 220px;
-          }
-          .services-card-title {
-            font-size: 16px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .services-section {
-            padding: 48px 10px 64px;
-          }
-          .services-label {
-            font-size: 10px;
-            padding: 6px 12px;
-          }
-          .services-title {
-            font-size: 28px;
-          }
-          .services-card-media {
-            min-height: 200px;
-          }
-        }
-      `
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .sv-grid { grid-template-columns: 1fr; }
+      .sv-header { grid-template-columns: 1fr; gap: 20px; }
+      .sv-card-media { height: 260px; }
+    }
+    @media (max-width: 640px) {
+      .sv-section { padding-bottom: 80px; }
+      .sv-header { padding: 60px 0 40px; margin-bottom: 40px; }
+      .sv-title { font-size: 2.8rem; }
+      .sv-card-media { height: 200px; }
+      .sv-card-meta, .sv-card-body { padding-left: 18px; padding-right: 18px; }
+      .sv-card-media { margin-left: 18px; margin-right: 18px; }
+    }
+  `
 
   return (
-    <section id="services" className="services-section">
-      <style dangerouslySetInnerHTML={{ __html: sectionStyles }} />
+    <section id="services" className="sv-section">
+      <style dangerouslySetInnerHTML={{ __html: styles }} />
 
-      <div className="services-container">
-        <div className="services-header">
+      <div className="sv-inner">
+
+        {/* ── HEADER ── */}
+        <div className="sv-header">
           <div>
-            <div className="services-label">
-              <span className="label-slashes">//</span>
-              <span>SERVICES</span>
-              <span className="label-slashes">//</span>
-            </div>
-            <h2 className="services-title">
-              What We Do<span className="period">.</span>
+            <div className="sv-eyebrow">Services</div>
+            <h2 className="sv-title">
+              What We<br />
+              <span className="sv-title-em">Do.</span>
             </h2>
           </div>
-          <p className="services-intro">
-            We combine strategy, speed, and skill to deliver exceptional design — every time.
+          <p className="sv-intro">
+            We combine strategy, speed, and skill to deliver exceptional design — every time. One flat fee, unlimited revisions, real results.
           </p>
         </div>
 
-        <div className="services-grid">
-          {services.map((service, index) => (
-            <article
-              key={service.id}
-              className="services-card"
-              {...hover}
-            >
-              <div className="services-card-top">
-                <FolderIcon />
-                <div>
-                  <h3 className="services-card-title">{service.title}</h3>
-                  <p className="services-card-desc">{service.description}</p>
-                </div>
-                <div className="services-tags">
+        {/* ── CARDS ── */}
+        <div className="sv-grid">
+          {services.map((service) => (
+            <article key={service.id} className="sv-card" {...hover}>
+
+              <div className="sv-card-meta">
+                <span className="sv-card-num">{service.num} /</span>
+                <span className="sv-card-arrow">↗</span>
+              </div>
+
+              <div className="sv-card-media">
+                <div
+                  className="sv-card-media-bg"
+                  style={{ background: service.gradient }}
+                />
+                <span className="sv-card-media-label">Dummy image</span>
+              </div>
+
+              <div className="sv-card-body">
+                <h3 className="sv-card-title">{service.title}</h3>
+                <p className="sv-card-desc">{service.description}</p>
+                <div className="sv-tags">
                   {service.tags.map((tag) => (
-                    <span key={tag} className="services-tag">
-                      {tag}
-                    </span>
+                    <span key={tag} className="sv-tag">{tag}</span>
                   ))}
                 </div>
               </div>
 
-              <div className="services-card-media" />
             </article>
           ))}
         </div>
+
+
+        {/* ── FOOTER ── */}
+        <div className="sv-footer">
+          <span className="sv-footer-note">All services available on a flat monthly subscription</span>
+          <a href="#pricing" className="sv-footer-cta">
+            See Pricing ↗
+          </a>
+        </div>
+
       </div>
     </section>
   )

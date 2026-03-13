@@ -339,105 +339,105 @@ export function Footer() {
       <style dangerouslySetInnerHTML={{ __html: styles }} />
 
       <div className="ft-inner">
-      {/* Top info band */}
-      <div className="ft-top">
-        <div className="ft-top-cell">
-          <span className="ft-top-dot" />
-          <span className="ft-top-label">Studio</span>
-          <span className="ft-top-value">Sofia, BG</span>
-        </div>
-        <div className="ft-top-divider" />
-        <div className="ft-top-cell">
-          <span className="ft-top-dot" />
-          <span className="ft-top-label">Est.</span>
-          <span className="ft-top-value">2019</span>
-        </div>
-        <div className="ft-top-divider" />
-        <div className="ft-top-cell">
-          <span className="ft-top-dot" />
-          <span className="ft-top-label">Projects shipped</span>
-          <span className="ft-top-value">140+</span>
-        </div>
-      </div>
-
-      {/* Hero wordmark row */}
-      <div className="ft-hero">
-        <div>
-          <div className="ft-label">
-            <span className="label-slashes">//</span>
-            <span>PIXEL.STUDIO</span>
-            <span className="label-slashes">//</span>
+        {/* Top info band */}
+        <div className="ft-top">
+          <div className="ft-top-cell">
+            <span className="ft-top-dot" />
+            <span className="ft-top-label">Studio</span>
+            <span className="ft-top-value">Sofia, BG</span>
           </div>
-          <h2 className="ft-wordmark">
-            Pixel<span className="period">.</span>Studio
-          </h2>
-        </div>
-
-        <div className="ft-hero-right">
-          <p className="ft-tagline">
-            Book a quick call to see how we work and get a plan built around your team.
-          </p>
-          <Link href="#pricing" className="ft-cta" {...hover}>
-            <span>See Pricing</span>
-            <span className="ft-cta-arrow">↗</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* Nav columns */}
-      <div className="ft-links">
-        <div className="ft-links-col">
-          <div className="ft-col-title">Navigate</div>
-          <div className="ft-col-links">
-            <Link href="#work" className="ft-col-link" {...hover}>Work</Link>
-            <Link href="#services" className="ft-col-link" {...hover}>Services</Link>
-            <Link href="#pricing" className="ft-col-link" {...hover}>Pricing</Link>
-            <Link href="#contact" className="ft-col-link" {...hover}>Contact</Link>
+          <div className="ft-top-divider" />
+          <div className="ft-top-cell">
+            <span className="ft-top-dot" />
+            <span className="ft-top-label">Est.</span>
+            <span className="ft-top-value">2019</span>
+          </div>
+          <div className="ft-top-divider" />
+          <div className="ft-top-cell">
+            <span className="ft-top-dot" />
+            <span className="ft-top-label">Projects shipped</span>
+            <span className="ft-top-value">140+</span>
           </div>
         </div>
-        <div className="ft-links-col">
-          <div className="ft-col-title">Services</div>
-          <div className="ft-col-links">
-            <Link href="#" className="ft-col-link" {...hover}>Web Design</Link>
-            <Link href="#" className="ft-col-link" {...hover}>Mobile Apps</Link>
-            <Link href="#" className="ft-col-link" {...hover}>Branding</Link>
-            <Link href="#" className="ft-col-link" {...hover}>Design Systems</Link>
+
+        {/* Hero wordmark row */}
+        <div className="ft-hero">
+          <div>
+            <div className="ft-label">
+              <span className="label-slashes">//</span>
+              <span>PIXEL.STUDIO</span>
+              <span className="label-slashes">//</span>
+            </div>
+            <h2 className="ft-wordmark">
+              Pixel<span className="period">.</span>Studio
+            </h2>
+          </div>
+
+          <div className="ft-hero-right">
+            <p className="ft-tagline">
+              Book a quick call to see how we work and get a plan built around your team.
+            </p>
+            <Link href="#pricing" className="ft-cta" {...hover}>
+              <span>See Pricing</span>
+              <span className="ft-cta-arrow">↗</span>
+            </Link>
           </div>
         </div>
-        <div className="ft-links-col">
-          <div className="ft-col-title">Social</div>
-          <div className="ft-col-links">
-            <Link href="#" className="ft-col-link" {...hover}>Behance</Link>
-            <Link href="#" className="ft-col-link" {...hover}>Twitter / X</Link>
-            <Link href="#" className="ft-col-link" {...hover}>LinkedIn</Link>
-            <Link href="#" className="ft-col-link" {...hover}>Dribbble</Link>
+
+        {/* Nav columns */}
+        <div className="ft-links">
+          <div className="ft-links-col">
+            <div className="ft-col-title">Navigate</div>
+            <div className="ft-col-links">
+              <Link href="#work" className="ft-col-link" {...hover}>Work</Link>
+              <Link href="#services" className="ft-col-link" {...hover}>Services</Link>
+              <Link href="#pricing" className="ft-col-link" {...hover}>Pricing</Link>
+              <Link href="#contact" className="ft-col-link" {...hover}>Contact</Link>
+            </div>
+          </div>
+          <div className="ft-links-col">
+            <div className="ft-col-title">Services</div>
+            <div className="ft-col-links">
+              <Link href="#" className="ft-col-link" {...hover}>Web Design</Link>
+              <Link href="#" className="ft-col-link" {...hover}>Mobile Apps</Link>
+              <Link href="#" className="ft-col-link" {...hover}>Branding</Link>
+              <Link href="#" className="ft-col-link" {...hover}>Design Systems</Link>
+            </div>
+          </div>
+          <div className="ft-links-col">
+            <div className="ft-col-title">Social</div>
+            <div className="ft-col-links">
+              <Link href="#" className="ft-col-link" {...hover}>Behance</Link>
+              <Link href="#" className="ft-col-link" {...hover}>Twitter / X</Link>
+              <Link href="#" className="ft-col-link" {...hover}>LinkedIn</Link>
+              <Link href="#" className="ft-col-link" {...hover}>Dribbble</Link>
+            </div>
+          </div>
+          <div className="ft-links-col">
+            <div className="ft-col-title">Legal</div>
+            <div className="ft-col-links">
+              <Link href="#" className="ft-col-link" {...hover}>Privacy Policy</Link>
+              <Link href="#" className="ft-col-link" {...hover}>Terms of Use</Link>
+              <Link href="#" className="ft-col-link" {...hover}>Cookie Policy</Link>
+            </div>
           </div>
         </div>
-        <div className="ft-links-col">
-          <div className="ft-col-title">Legal</div>
-          <div className="ft-col-links">
-            <Link href="#" className="ft-col-link" {...hover}>Privacy Policy</Link>
-            <Link href="#" className="ft-col-link" {...hover}>Terms of Use</Link>
-            <Link href="#" className="ft-col-link" {...hover}>Cookie Policy</Link>
+
+        {/* Bottom bar */}
+        <div className="ft-bottom">
+          <span className="ft-meta">© 2025 Pixel Studio. All rights reserved.</span>
+
+          <div className="ft-badge">
+            <span className="ft-badge-dot" />
+            Available for new projects
+          </div>
+
+          <div className="ft-socials">
+            <button type="button" className="ft-social" aria-label="Behance" {...hover}>Bē</button>
+            <button type="button" className="ft-social" aria-label="Twitter" {...hover}>𝕏</button>
+            <button type="button" className="ft-social" aria-label="LinkedIn" {...hover}>in</button>
           </div>
         </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="ft-bottom">
-        <span className="ft-meta">© 2025 Pixel Studio. All rights reserved.</span>
-
-        <div className="ft-badge">
-          <span className="ft-badge-dot" />
-          Available for new projects
-        </div>
-
-        <div className="ft-socials">
-          <button type="button" className="ft-social" aria-label="Behance" {...hover}>Bē</button>
-          <button type="button" className="ft-social" aria-label="Twitter" {...hover}>𝕏</button>
-          <button type="button" className="ft-social" aria-label="LinkedIn" {...hover}>in</button>
-        </div>
-      </div>
       </div>
     </footer>
   )

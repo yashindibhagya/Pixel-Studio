@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { Header } from '@/components/sections/Header'
-import { Cursor } from '@/components/Cursor'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const viewport: Viewport = {
@@ -31,12 +30,10 @@ export default function RootLayout({
       </head>
       <body className="antialiased min-h-screen">
         <ThemeProvider>
-          <Cursor>
-            <div className="page-shell">
-              <Header />
-              <main>{children}</main>
-            </div>
-          </Cursor>
+          <div className="page-shell">
+            <Header />
+            <main>{children}</main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

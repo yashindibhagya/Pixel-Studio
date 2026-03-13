@@ -35,93 +35,39 @@ const steps: Step[] = [
   },
 ]
 
-// SVG curved arrows matching the screenshot
 function ArrowLeft() {
   return (
-    <svg
-      width="80"
-      height="48"
-      viewBox="0 0 80 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M4 38 C 10 10, 50 4, 76 14"
-        stroke="#111"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinecap="round"
-      />
-      {/* Arrowhead */}
-      <path
-        d="M68 8 L76 14 L66 18"
-        stroke="#111"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg width="80" height="48" viewBox="0 0 80 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4 38 C 10 10, 50 4, 76 14" stroke="rgba(240,237,230,0.25)" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeDasharray="4 3" />
+      <path d="M68 8 L76 14 L66 18" stroke="rgba(240,237,230,0.25)" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
-  );
+  )
 }
 
-function ArrowRight() {
-  return (
-    <svg
-      width="80"
-      height="48"
-      viewBox="0 0 80 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        d="M76 10 C 70 38, 30 44, 4 34"
-        stroke="#111"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinecap="round"
-      />
-      {/* Arrowhead */}
-      <path
-        d="M12 40 L4 34 L14 30"
-        stroke="#111"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function StepCard({
-  step,
-  index,
-  isVisible,
-}: {
-  step: Step
-  index: number
-  isVisible: boolean
-}) {
+function StepCard({ step, isVisible }: { step: Step; isVisible: boolean }) {
   return (
     <div
-      className={`step-card ${isVisible ? "visible" : ""}`}
+      className={`pc-card${isVisible ? ' visible' : ''}`}
       style={{
         transitionDelay: step.delay,
-        marginTop: step.offsetTop ? "-60px" : "60px",
+        marginTop: step.offsetTop ? '-60px' : '60px',
       }}
     >
-      <div className="card-inner">
-        <div className="step-strip" aria-hidden />
-        <span className="step-number">{step.number}</span>
-        <h3 className="step-title">{step.title}</h3>
-        <div className="card-spacer" />
-        <p className="step-description">{step.description}</p>
+      <div className="pc-card-inner">
+        <div className="pc-strip" aria-hidden />
+
+        <div className="pc-card-head">
+          <span className="pc-num">{step.number} /</span>
+          <span className="pc-card-arrow">↗</span>
+        </div>
+
+        <div className="pc-card-spacer" />
+
+        <h3 className="pc-title">{step.title}</h3>
+        <p className="pc-desc">{step.description}</p>
       </div>
     </div>
-  );
+  )
 }
 
 export function Process() {
@@ -144,320 +90,355 @@ export function Process() {
     return () => observer.disconnect()
   }, [])
 
-  const sectionStyles = `
-        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap');
+  const styles = `
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap');
 
-        .hiw-section {
-          font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-          background: #fff;
-          padding: 100px 24px 120px;
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
+    :root {
+      --pc-bg: #F8F6FC;
+      --pc-ink: #0C021A;
+      --pc-muted: rgba(12, 2, 26, 0.6);
+      --pc-accent: #ff4d1c;
+      --pc-border: rgba(12, 2, 26, 0.08);
+    }
 
-        .hiw-container {
-          max-width: 1100px;
-          width: 100%;
-          margin: 0 auto;
-        }
+    .pc-section {
+      font-family: 'Syne', sans-serif;
+      background: var(--pc-bg);
+      color: var(--pc-ink);
+      padding: 0 0 120px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* Header */
-        .hiw-header {
-          text-align: center;
-          margin-bottom: 56px;
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .hiw-header.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
+    /* grain */
+    .pc-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .hiw-label {
-          display: inline-block;
-          font-size: 13px;
-          font-weight: 500;
-          color: #111;
-          background: #f0f0f0;
-          border-radius: 999px;
-          padding: 5px 14px;
-          margin-bottom: 20px;
-          letter-spacing: 0.01em;
-        }
+    .pc-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 4vw;
+      position: relative;
+      z-index: 1;
+    }
 
-        .hiw-heading {
-          font-size: clamp(40px, 6vw, 68px);
-          font-weight: 800;
-          color: #0a0a0a;
-          line-height: 1.1;
-          letter-spacing: -0.03em;
-          margin: 0;
-        }
+    /* ── HEADER ── */
+    .pc-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 32px;
+      padding: 80px 0 56px;
+      border-bottom: 1px solid var(--pc-border);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .pc-header.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        /* Cards layout */
-        .hiw-cards-wrapper {
-          position: relative;
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          align-items: start;
-          gap: 40px;
-          margin-top: 146px;
-        }
+    .pc-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pc-muted);
+      margin-bottom: 18px;
+    }
+    .pc-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--pc-accent);
+    }
 
-        /* Arrow containers — positioned between cards */
-        .arrow-between {
-          position: absolute;
-          top: 0;
-          pointer-events: none;
-          z-index: 2;
-        }
+    .pc-title-main {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--pc-ink);
+      margin: 0;
+    }
+    .pc-title-em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--pc-accent);
+    }
 
-        .arrow-between.arrow-1 {
-          /* Between card 1 and card 2, sits near top of card 1 */
-          left: calc(33.333% - 40px);
-          top: 28px;
-          opacity: 0;
-          transition: opacity 0.6s ease 0.3s;
-        }
-        .arrow-between.arrow-2 {
-          /* Between card 2 and card 3, points toward third box */
-          left: calc(66.666% - 40px);
-          /* top: 28px; */
-          top: calc(100% - 200px);
-          opacity: 0;
-          transition: opacity 0.6s ease 0.5s;
-        }
-        .arrow-between.visible {
-          opacity: 1;
-        }
+    .pc-intro {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.85;
+      color: var(--pc-muted);
+      font-weight: 300;
+      max-width: 400px;
+      align-self: end;
+    }
 
-        /* Step card */
-        .step-card {
-          opacity: 0;
-          transform: translateY(28px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .step-card.visible {
-          opacity: 1;
-          transform: translateY(0) !important; /* override inline marginTop with animation */
-        }
+    /* ── CARDS WRAPPER ── */
+    .pc-cards-wrapper {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: start;
+      gap: 1px;
+      background: var(--pc-border);
+      border-left: 1px solid var(--pc-border);
+      border-right: 1px solid var(--pc-border);
+      border-bottom: 1px solid var(--pc-border);
+      margin-top: 120px;
+    }
 
-        .card-inner {
-          background: #f6f6f6;
-          border-radius: 16px;
-          padding: 28px 28px 28px;
-          min-height: 340px;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-          overflow: hidden;
-          cursor: pointer;
-          transition: background 0.35s ease;
-        }
+    /* arrows */
+    .pc-arrow {
+      position: absolute;
+      top: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.6s ease 0.3s;
+    }
+    .pc-arrow.arrow-2 { transition-delay: 0.5s; }
+    .pc-arrow.visible { opacity: 1; }
 
-        .card-inner::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: #111;
-          transform: scaleY(0);
-          transform-origin: bottom;
-          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-          z-index: 0;
-        }
+    .pc-arrow.arrow-1 {
+      left: calc(33.333% - 40px);
+      top: 28px;
+    }
+    .pc-arrow.arrow-2 {
+      left: calc(66.666% - 40px);
+      top: calc(100% - 200px);
+    }
 
-        .card-inner:hover::before {
-          transform: scaleY(1);
-        }
+    /* ── CARD ── */
+    .pc-card {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .pc-card.visible {
+      opacity: 1;
+      transform: translateY(0) !important;
+    }
 
-        .step-strip {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 5px;
-          height: 0;
-          background: var(--accent);
-          transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-          z-index: 2;
-        }
+    .pc-card-inner {
+      background: #ffffff;
+      min-height: 340px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: background 0.3s;
+    }
+    .pc-card-inner:hover { background: #f0ecff; }
 
-        .card-inner:hover .step-strip {
-          height: 100%;
-        }
+    /* ink fill from bottom — same system as Work/FAQ */
+    .pc-card-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      z-index: 0;
+    }
+    .pc-card-inner:hover::before { transform: scaleY(1); }
 
-        .step-number {
-          position: relative;
-          z-index: 1;
-          font-size: 13px;
-          font-weight: 500;
-          color: #888;
-          letter-spacing: 0.01em;
-          display: block;
-          margin-bottom: 10px;
-          transition: color 0.35s;
-        }
+    /* accent bar */
+    .pc-strip {
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px; height: 0%;
+      background: var(--pc-accent);
+      transition: height 0.45s cubic-bezier(0.16,1,0.3,1);
+      z-index: 3;
+    }
+    .pc-card-inner:hover .pc-strip { height: 100%; }
 
-        .card-inner:hover .step-number {
-          color: rgba(255,255,255,0.35);
-        }
+    /* head row */
+    .pc-card-head {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0;
+    }
+    .pc-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--pc-muted);
+      transition: color 0.3s;
+    }
+    .pc-card-inner:hover .pc-num { color: rgba(12,12,11,0.35); }
 
-        .step-title {
-          position: relative;
-          z-index: 1;
-          font-size: clamp(20px, 2.2vw, 26px);
-          font-weight: 700;
-          color: #0a0a0a;
-          line-height: 1.2;
-          letter-spacing: -0.025em;
-          margin: 0;
-          max-width: 240px;
-          transition: color 0.35s;
-        }
+    .pc-card-arrow {
+      width: 28px; height: 28px;
+      border: 1px solid var(--pc-border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      color: var(--pc-muted);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .pc-card-inner:hover .pc-card-arrow {
+      border-color: var(--pc-accent);
+      color: var(--pc-accent);
+      transform: rotate(45deg);
+    }
 
-        .card-inner:hover .step-title {
-          color: #ffffff;
-        }
+    .pc-card-spacer { flex: 1; min-height: 48px; }
 
-        .card-spacer {
-          flex: 1;
-          min-height: 40px;
-        }
+    .pc-title {
+      position: relative;
+      z-index: 1;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--pc-ink);
+      margin: 0 0 12px;
+      transition: color 0.3s;
+    }
+    .pc-card-inner:hover .pc-title { color: #0c0c0b; }
 
-        .step-description {
-          position: relative;
-          z-index: 1;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 1.6;
-          color: #555;
-          margin: 0;
-          max-width: 280px;
-          transition: color 0.35s;
-        }
+    .pc-desc {
+      position: relative;
+      z-index: 1;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--pc-muted);
+      margin: 0;
+      transition: color 0.3s;
+    }
+    .pc-card-inner:hover .pc-desc { color: rgba(12,12,11,0.55); }
 
-        .card-inner:hover .step-description {
-          color: rgba(255,255,255,0.55);
-        }
-          
+    /* ── FOOTER STRIP ── */
+    .pc-footer {
+      padding: 32px 0;
+      border: 1px solid var(--pc-border);
+      border-top: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+    .pc-footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pc-muted);
+    }
+    .pc-footer-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--pc-accent);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .pc-footer-cta:hover { background: #ff6b3d; transform: translateX(3px); }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-          .hiw-section {
-            padding: 80px 20px 100px;
-          }
-          .hiw-cards-wrapper {
-            gap: 32px;
-            margin-top: 80px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .hiw-section {
-            padding: 64px 18px 80px;
-          }
-          .hiw-header {
-            margin-bottom: 40px;
-          }
-          .hiw-heading {
-            font-size: clamp(34px, 7vw, 44px);
-          }
-          .hiw-cards-wrapper {
-            grid-template-columns: 1fr;
-            gap: 16px;
-            margin-top: 48px;
-          }
-          .step-card {
-            margin-top: 0 !important;
-          }
-          .arrow-between {
-            display: none;
-          }
-          .card-inner {
-            min-height: auto;
-            padding: 24px;
-          }
-        }
-
-        @media (max-width: 640px) {
-          .hiw-section {
-            padding: 56px 16px 72px;
-          }
-          .hiw-heading {
-            font-size: 32px;
-          }
-          .step-title {
-            font-size: clamp(18px, 4vw, 22px);
-          }
-        }
-
-        @media (max-width: 480px) {
-          .hiw-section {
-            padding: 48px 14px 64px;
-          }
-          .hiw-heading {
-            font-size: 28px;
-          }
-          .hiw-label {
-            font-size: 12px;
-            padding: 4px 12px;
-          }
-          .card-inner {
-            padding: 20px 18px;
-          }
-          .step-description {
-            font-size: 13px;
-          }
-        }
-      `
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .pc-header { grid-template-columns: 1fr; gap: 20px; }
+      .pc-cards-wrapper { margin-top: 80px; }
+    }
+    @media (max-width: 768px) {
+      .pc-cards-wrapper {
+        grid-template-columns: 1fr;
+        margin-top: 48px;
+      }
+      .pc-card { margin-top: 0 !important; }
+      .pc-arrow { display: none; }
+      .pc-card-inner { min-height: auto; }
+    }
+    @media (max-width: 640px) {
+      .pc-section { padding-bottom: 80px; }
+      .pc-header { padding: 60px 0 40px; }
+      .pc-title-main { font-size: 2.8rem; }
+      .pc-card-inner { padding: 22px 20px; }
+      .pc-footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    }
+  `
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: sectionStyles }} />
+      <style dangerouslySetInnerHTML={{ __html: styles }} />
 
-      <section id="process" className="hiw-section" ref={sectionRef}>
-      <div className="benefits-container">
-        <div className="benefits-header">
-          <div>
-            <div className="benefits-label">
-              <span>// BENEFITS //</span>
+      <section id="process" className="pc-section" ref={sectionRef}>
+        <div className="pc-inner">
+
+          {/* ── HEADER ── */}
+          <div className={`pc-header${isVisible ? ' visible' : ''}`}>
+            <div>
+              <div className="pc-eyebrow">Process</div>
+              <h2 className="pc-title-main">
+                How it<br />
+                <span className="pc-title-em">Works.</span>
+              </h2>
             </div>
-            <h2 className="benefits-title">
-              How it works<span className="period">.</span>
-            </h2>
+            <p className="pc-intro">
+              Get unlimited design work for a simple monthly rate. No hourly billing, no surprises — pause or cancel whenever you need.
+            </p>
           </div>
-          <p className="benefits-intro">
-            Get unlimited design work for a simple monthly rate. No hourly billing, no surprises — pause or cancel whenever you need.
-          </p>
-        </div>
 
-          {/* Cards + Arrows */}
-          <div className="hiw-cards-wrapper">
+          {/* ── CARDS ── */}
+          <div className="pc-cards-wrapper">
 
-            {/* Arrow 1: top-center between card 1 and 2 */}
-            <div className={`arrow-between arrow-1 ${isVisible ? "visible" : ""}`}>
+            <div className={`pc-arrow arrow-1${isVisible ? ' visible' : ''}`}>
+              <ArrowLeft />
+            </div>
+            <div className={`pc-arrow arrow-2${isVisible ? ' visible' : ''}`}>
               <ArrowLeft />
             </div>
 
-            {/* Arrow 2: between card 2 and 3, points to third box */}
-            <div className={`arrow-between arrow-2 ${isVisible ? "visible" : ""}`}>
-              <ArrowLeft />
-            </div>
-
-            {steps.map((step, index) => (
-              <StepCard
-                key={step.number}
-                step={step}
-                index={index}
-                isVisible={isVisible}
-              />
+            {steps.map((step) => (
+              <StepCard key={step.number} step={step} isVisible={isVisible} />
             ))}
+          </div>
+
+          {/* ── FOOTER STRIP ── */}
+          <div className="pc-footer">
+            <span className="pc-footer-note">Three steps. Zero friction. Real results.</span>
+            <a href="#contact" className="pc-footer-cta">Book a free call ↗</a>
           </div>
 
         </div>
       </section>
     </>
-  );
+  )
 }

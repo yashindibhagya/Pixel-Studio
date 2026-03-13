@@ -35,424 +35,461 @@ export function FAQ() {
   const hover = useCursorHover()
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
-  const sectionStyles = `
-        .faq-section {
-          background: #ffffff;
-          padding: 96px 16px 120px;
-          display: flex;
-          justify-content: center;
-        }
+  const styles = `
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap');
 
-        .faq-container {
-          max-width: 1280px;
-          width: 100%;
-          margin: 0 auto;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-          display: grid;
-          grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-          gap: 64px;
-          align-items: flex-start;
-        }
+    :root {
+      --fq-bg: #F8F6FC;
+      --fq-ink: #0C021A;
+      --fq-muted: rgba(12, 2, 26, 0.6);
+      --fq-accent: #ff4d1c;
+      --fq-border: rgba(12, 2, 26, 0.08);
+    }
 
-        .faq-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 6px 14px;
-          border-radius: 999px;
-          background: #f5f5f5;
-          box-shadow: none;
-          font-size: 12px;
-          color: #555;
-          margin-bottom: 18px;
-        }
+    .fq-section {
+      font-family: 'Syne', sans-serif;
+      background: var(--fq-bg);
+      color: var(--fq-ink);
+      padding: 0 0 120px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .faq-pill-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 999px;
-          background: #16a34a;
-          box-shadow: 0 0 0 4px rgba(22,163,74,0.25);
-        }
+    /* grain */
+    .fq-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .faq-pill-strong {
-          font-weight: 600;
-          color: #111;
-        }
+    .fq-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 4vw;
+      position: relative;
+      z-index: 1;
+    }
 
-        .faq-section .work-label {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 8px 14px;
-          border-radius: 999px;
-          background: #111;
-          color: #ffffff;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          margin-bottom: 12px;
-        }
-        .faq-section .work-label .label-slashes {
-          color: var(--accent);
-        }
-        .faq-section .work-title {
-          font-size: clamp(46px, 6vw, 62px);
-          font-weight: 800;
-          letter-spacing: -0.04em;
-          margin: 0 0 18px;
-          color: #111;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-        }
-        .faq-section .work-title span.period {
-          color: var(--accent);
-        }
+    /* ── HEADER ── */
+    .fq-header {
+      padding: 80px 0 56px;
+      border-bottom: 1px solid var(--fq-border);
+      margin-bottom: 0;
+    }
 
-        .faq-body {
-          max-width: 420px;
-          font-size: 14px;
-          line-height: 1.7;
-          color: #6b6b6b;
-          margin-bottom: 28px;
-        }
+    .fq-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fq-muted);
+      margin-bottom: 18px;
+    }
+    .fq-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--fq-accent);
+    }
 
-        .faq-actions {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 12px;
-        }
+    .fq-title {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      color: var(--fq-ink);
+      margin: 0;
+    }
+    .fq-title-em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--fq-accent);
+    }
 
-        .faq-btn-primary,
-        .faq-btn-secondary {
-          appearance: none;
-          border: none;
-          outline: none;
-          cursor: pointer;
-          border-radius: 999px;
-          padding: 11px 20px;
-          font-size: 14px;
-          font-weight: 500;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          text-decoration: none;
-          transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
-        }
+    /* ── BODY GRID ── */
+    .fq-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--fq-border);
+      border-left: 1px solid var(--fq-border);
+      border-right: 1px solid var(--fq-border);
+      border-bottom: 1px solid var(--fq-border);
+    }
 
-        .faq-btn-primary {
-          background: #111;
-          color: #fff;
-          box-shadow: 0 16px 32px rgba(0,0,0,0.4);
-        }
+    /* ── LEFT PANEL ── */
+    .fq-left {
+      background: var(--fq-bg);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 40px;
+    }
 
-        .faq-btn-primary:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
+    .fq-availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--fq-border);
+      border-radius: 2px;
+      padding: 7px 14px;
+      width: fit-content;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fq-muted);
+      margin-bottom: 24px;
+    }
+    .fq-avail-dot {
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: fqPulse 2s infinite;
+    }
+    @keyframes fqPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
+      50%      { box-shadow: 0 0 0 5px rgba(74,222,128,0); }
+    }
 
-        .faq-btn-primary-icon {
-          width: 20px;
-          height: 20px;
-          border-radius: 6px;
-          background: #22c55e;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 14px;
-          color: #0b1120;
-        }
+    .fq-cta-heading {
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--fq-ink);
+      margin-bottom: 16px;
+    }
+    .fq-cta-heading-em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--fq-accent);
+    }
 
-        .faq-btn-secondary {
-          background: #ffffff;
-          color: #111;
-          border: 1px solid #e4e4e4;
-          box-shadow: 0 12px 26px rgba(0,0,0,0.08);
-        }
+    .fq-cta-body {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      line-height: 1.85;
+      color: var(--fq-muted);
+      font-weight: 300;
+      margin-bottom: 32px;
+      max-width: 380px;
+    }
 
-        .faq-btn-secondary:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 16px 32px rgba(0,0,0,0.12);
-        }
+    .fq-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
 
-        .faq-btn-secondary-icon {
-          width: 22px;
-          height: 22px;
-          border-radius: 999px;
-          background: #0ea5e9;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 14px;
-          color: #fff;
-        }
+    .fq-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--fq-accent);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 22px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .fq-btn-primary:hover { background: #ff6b3d; transform: translateX(3px); }
 
-        .faq-list {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
+    .fq-btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--fq-ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--fq-border);
+      padding-bottom: 4px;
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .fq-btn-ghost:hover { border-color: var(--fq-accent); color: var(--fq-accent); }
 
-        .faq-item {
-          position: relative;
-          background: #f5f5f5;
-          border-radius: 14px;
-          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-          overflow: hidden;
-          cursor: pointer;
-          transition: box-shadow 0.2s ease;
-        }
+    /* stat pair at bottom of left */
+    .fq-stat-row {
+      display: flex;
+      gap: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--fq-border);
+    }
+    .fq-stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--fq-ink);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .fq-stat-num span { color: var(--fq-accent); }
+    .fq-stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fq-muted);
+    }
 
-        .faq-item::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: #111;
-          transform: scaleY(0);
-          transform-origin: bottom;
-          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-          z-index: 0;
-        }
+    /* ── RIGHT PANEL – FAQ LIST ── */
+    .fq-right {
+      background: var(--fq-bg);
+      display: flex;
+      flex-direction: column;
+    }
 
-        .faq-item:hover::before {
-          transform: scaleY(1);
-        }
+    .fq-item {
+      position: relative;
+      border-bottom: 1px solid var(--fq-border);
+      cursor: pointer;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .fq-item:last-child { border-bottom: none; }
 
-        .faq-item-strip {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 5px;
-          height: 0;
-          background: var(--accent);
-          transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-          z-index: 2;
-        }
+    /* ink fill sweeps up from bottom — same as Work hover */
+    .fq-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      z-index: 0;
+    }
+    .fq-item:hover::before { transform: scaleY(1); }
 
-        .faq-item:hover .faq-item-strip {
-          height: 100%;
-        }
+    /* accent bar right side */
+    .fq-item-strip {
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px;
+      height: 0%;
+      background: var(--fq-accent);
+      transition: height 0.45s cubic-bezier(0.16,1,0.3,1);
+      z-index: 2;
+    }
+    .fq-item:hover .fq-item-strip { height: 100%; }
 
-        .faq-item-header {
-          position: relative;
-          z-index: 1;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 16px;
-          padding: 18px 20px;
-        }
+    .fq-item-header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 28px;
+    }
 
-        .faq-question {
-          font-size: 15px;
-          font-weight: 600;
-          color: #111;
-          text-align: left;
-          flex: 1;
-          transition: color 0.35s;
-        }
+    .fq-question {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      font-weight: 700;
+      color: var(--fq-ink);
+      text-align: left;
+      flex: 1;
+      transition: color 0.3s;
+      letter-spacing: -0.01em;
+    }
+    .fq-item:hover .fq-question { color: #0c0c0b; }
+    .fq-item.expanded .fq-question { color: var(--fq-ink); }
+    .fq-item.expanded:hover .fq-question { color: #0c0c0b; }
 
-        .faq-item:hover .faq-question {
-          color: #ffffff;
-        }
+    .fq-toggle {
+      position: relative;
+      z-index: 1;
+      width: 26px; height: 26px;
+      border: 1px solid var(--fq-border);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--fq-muted);
+      flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      font-family: 'DM Mono', monospace;
+    }
+    .fq-item:hover .fq-toggle {
+      border-color: rgba(12,12,11,0.2);
+      color: #0c0c0b;
+      background: transparent;
+    }
+    .fq-item.expanded .fq-toggle {
+      border-color: var(--fq-accent);
+      color: var(--fq-accent);
+      background: rgba(255,77,28,0.08);
+    }
+    .fq-item.expanded:hover .fq-toggle {
+      border-color: var(--fq-accent);
+      color: var(--fq-accent);
+      background: rgba(255,77,28,0.12);
+    }
 
-        .faq-toggle {
-          position: relative;
-          z-index: 1;
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 18px;
-          font-weight: 300;
-          color: #fff;
-          background: #9ca3af;
-          flex-shrink: 0;
-          transition: background 0.2s ease, color 0.2s ease;
-        }
+    .fq-answer-wrap {
+      position: relative;
+      z-index: 1;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .fq-item.expanded .fq-answer-wrap { max-height: 400px; }
 
-        .faq-item:hover .faq-toggle {
-          background: rgba(255,255,255,0.25);
-        }
+    .fq-answer {
+      padding: 0 28px 22px;
+      border-top: 1px solid var(--fq-border);
+      padding-top: 16px;
+    }
+    .fq-item:hover .fq-answer { border-top-color: rgba(12,12,11,0.1); }
 
-        .faq-item.expanded .faq-toggle {
-          background: var(--accent);
-        }
+    .fq-answer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      line-height: 1.85;
+      color: var(--fq-muted);
+      margin: 0;
+      font-weight: 300;
+      transition: color 0.3s;
+    }
+    .fq-item:hover .fq-answer p { color: rgba(12,12,11,0.6); }
 
-        .faq-item.expanded:hover .faq-toggle {
-          background: var(--accent);
-        }
-
-        .faq-answer-wrap {
-          position: relative;
-          z-index: 1;
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.3s ease;
-        }
-
-        .faq-item.expanded .faq-answer-wrap {
-          max-height: 400px;
-        }
-
-        .faq-answer {
-          padding: 14px 20px 18px;
-          border-top: 1px solid #e5e7eb;
-        }
-
-        .faq-item:hover .faq-answer {
-          border-top-color: rgba(255,255,255,0.15);
-        }
-
-        .faq-answer p {
-          font-size: 14px;
-          line-height: 1.65;
-          color: #555;
-          margin: 0;
-          transition: color 0.35s;
-        }
-
-        .faq-item:hover .faq-answer p {
-          color: rgba(255,255,255,0.55);
-        }
-
-        @media (max-width: 1024px) {
-          .faq-section {
-            padding: 80px 14px 96px;
-          }
-          .faq-container {
-            grid-template-columns: minmax(0, 1.1fr);
-            gap: 40px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .faq-section {
-            padding: 64px 12px 80px;
-          }
-          .faq-section .work-title {
-            font-size: clamp(34px, 7vw, 44px);
-          }
-          .faq-body {
-            margin-bottom: 24px;
-          }
-        }
-
-        @media (max-width: 640px) {
-          .faq-section {
-            padding: 56px 12px 72px;
-          }
-          .faq-container {
-            gap: 32px;
-          }
-          .faq-section .work-title {
-            font-size: 30px;
-          }
-          .faq-question {
-            font-size: 14px;
-          }
-          .faq-actions {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .faq-section {
-            padding: 48px 10px 64px;
-          }
-          .faq-section .work-label {
-            font-size: 10px;
-            padding: 6px 12px;
-          }
-          .faq-section .work-title {
-            font-size: 26px;
-          }
-          .faq-item-header {
-            padding: 16px 18px;
-          }
-          .faq-answer {
-            padding: 12px 18px 16px;
-          }
-        }
-      `
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .fq-body-grid { grid-template-columns: 1fr; }
+      .fq-left { padding: 40px 28px; }
+    }
+    @media (max-width: 640px) {
+      .fq-section { padding-bottom: 80px; }
+      .fq-header { padding: 60px 0 40px; }
+      .fq-title { font-size: 2.8rem; }
+      .fq-left { padding: 32px 20px; gap: 28px; }
+      .fq-item-header { padding: 18px 20px; }
+      .fq-answer { padding: 0 20px 18px; padding-top: 14px; }
+      .fq-stat-row { gap: 20px; }
+    }
+  `
 
   return (
-    <section id="faq" className="faq-section">
-      <style dangerouslySetInnerHTML={{ __html: sectionStyles }} />
+    <section id="faqs" className="fq-section">
+      <style dangerouslySetInnerHTML={{ __html: styles }} />
 
-      <div className="faq-container">
-        <div>
-          <div className="work-label">
-            <span className="label-slashes">//</span>
-            <span>FAQ</span>
-            <span className="label-slashes">//</span>
-          </div>
-          <h2 className="work-title">
-            Have a project in mind<span className="period">.</span>
-            <br />
-            Let&apos;s make it real.
+      <div className="fq-inner">
+
+        {/* ── HEADER ── */}
+        <div className="fq-header">
+          <div className="fq-eyebrow">FAQ</div>
+          <h2 className="fq-title">
+            Have a project<br />
+            in <span className="fq-title-em">mind?</span>
           </h2>
-
-          <p className="faq-body">
-            I&apos;m currently available for new projects starting March 2025. Whether you need a full brand identity,
-            a product redesign, or a strategic creative partner, let&apos;s talk.
-          </p>
-
-          <div className="faq-actions">
-            <Link
-              href="mailto:hello@pixelstudio.io?subject=Book%20a%20free%20call"
-              className="faq-btn-primary"
-              {...hover}
-            >
-              <span className="faq-btn-primary-icon">●</span>
-              <span>Book a free call</span>
-            </Link>
-
-            <Link
-              href="mailto:hello@pixelstudio.io"
-              className="faq-btn-secondary"
-              {...hover}
-            >
-              <span className="faq-btn-secondary-icon">✉</span>
-              <span>Let&apos;s chat</span>
-            </Link>
-          </div>
         </div>
 
-        <div className="faq-list">
-          {faqs.map((item, index) => {
-            const isOpen = openIndex === index
-            return (
-              <div
-                key={item.question}
-                className={`faq-item ${isOpen ? 'expanded' : ''}`}
-                onClick={() => setOpenIndex(isOpen ? null : index)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    setOpenIndex(isOpen ? null : index)
-                  }
-                }}
-                aria-expanded={isOpen}
-              >
-                <div className="faq-item-strip" aria-hidden />
-                <div className="faq-item-header">
-                  <div className="faq-question">{item.question}</div>
-                  <div className="faq-toggle" aria-hidden>{isOpen ? '−' : '+'}</div>
-                </div>
-                <div className="faq-answer-wrap">
-                  <div className="faq-answer">
-                    <p>{item.answer}</p>
+        {/* ── BODY GRID ── */}
+        <div className="fq-body-grid">
+
+          {/* LEFT — CTA */}
+          <div className="fq-left">
+            <div>
+              <div className="fq-availability">
+                <span className="fq-avail-dot" />
+                Available from March 2025
+              </div>
+
+              <h3 className="fq-cta-heading">
+                Let's make<br />
+                it <span className="fq-cta-heading-em">real.</span>
+              </h3>
+
+              <p className="fq-cta-body">
+                Whether you need a full brand identity, a product redesign, or a strategic creative partner — let's talk and figure out the best path forward.
+              </p>
+
+              <div className="fq-actions">
+                <Link href="mailto:hello@pixelstudio.io?subject=Book%20a%20free%20call" className="fq-btn-primary" {...hover}>
+                  Book a free call ↗
+                </Link>
+                <Link href="mailto:hello@pixelstudio.io" className="fq-btn-ghost" {...hover}>
+                  Drop us an email →
+                </Link>
+              </div>
+            </div>
+
+            <div className="fq-stat-row">
+              <div>
+                <div className="fq-stat-num">14<span>d</span></div>
+                <div className="fq-stat-label">Avg. first delivery</div>
+              </div>
+              <div>
+                <div className="fq-stat-num">∞<span></span></div>
+                <div className="fq-stat-label">Revisions included</div>
+              </div>
+              <div>
+                <div className="fq-stat-num">0<span>lock</span></div>
+                <div className="fq-stat-label">Cancel anytime</div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT — FAQ accordion */}
+          <div className="fq-right">
+            {faqs.map((item, index) => {
+              const isOpen = openIndex === index
+              return (
+                <div
+                  key={item.question}
+                  className={`fq-item${isOpen ? ' expanded' : ''}`}
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setOpenIndex(isOpen ? null : index)
+                    }
+                  }}
+                  aria-expanded={isOpen}
+                  {...hover}
+                >
+                  <div className="fq-item-strip" aria-hidden />
+
+                  <div className="fq-item-header">
+                    <div className="fq-question">{item.question}</div>
+                    <div className="fq-toggle" aria-hidden>{isOpen ? '−' : '+'}</div>
+                  </div>
+
+                  <div className="fq-answer-wrap">
+                    <div className="fq-answer">
+                      <p>{item.answer}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
+
         </div>
       </div>
     </section>

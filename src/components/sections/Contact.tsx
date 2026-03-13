@@ -7,457 +7,523 @@ const contactMethods = [
   {
     id: 'email',
     label: 'Write to sales',
-    value: 'sales@formix.com',
+    value: 'sales@pixelstudio.io',
+    icon: '✉',
   },
   {
     id: 'phone',
     label: 'Call us',
     value: '+359-887-779',
+    icon: '☎',
   },
 ]
+
+const pricingOptions = ['Design retainer', 'Single project', 'Brand identity', 'Other']
 
 export function Contact() {
   const hover = useCursorHover()
 
-  const sectionStyles = `
-        .contact-section {
-          background: #f4f4f4;
-          padding: 96px 16px 120px;
-          display: flex;
-          justify-content: center;
-        }
+  const styles = `
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap');
 
-        .contact-shell {
-          max-width: 1280px;
-          width: 100%;
-          margin: 0 auto;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-          display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-          gap: 24px;
-        }
+    :root {
+      --ct-bg: #F8F6FC;
+      --ct-ink: #0C021A;
+      --ct-muted: rgba(12, 2, 26, 0.6);
+      --ct-accent: #ff4d1c;
+      --ct-border: rgba(12, 2, 26, 0.08);
+    }
 
-        /* Left card */
-        .contact-left {
-          background: #ffffff;
-          border-radius: 22px;
-          padding: 32px 28px 32px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          min-height: 480px;
-          box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        }
+    .ct-section {
+      font-family: 'Syne', sans-serif;
+      background: var(--ct-bg);
+      color: var(--ct-ink);
+      padding: 0 0 120px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .contact-left-inner {
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-          justify-content: space-between;
-        }
+    /* grain */
+    .ct-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .contact-label {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 8px 14px;
-          border-radius: 999px;
-          background: #111;
-          color: #ffffff;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          margin-bottom: 12px;
-          width: fit-content;
-        }
+    .ct-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 4vw;
+      position: relative;
+      z-index: 1;
+    }
 
-        .contact-label .label-slashes {
-          color: var(--accent);
-        }
+    /* ── HEADER ── */
+    .ct-header {
+      padding: 80px 0 56px;
+      border-bottom: 1px solid var(--ct-border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 32px;
+    }
 
-        .contact-heading {
-          font-size: clamp(40px, 5vw, 56px);
-          font-weight: 800;
-          letter-spacing: -0.04em;
-          line-height: 1.05;
-          margin: 0 0 16px;
-          color: #111;
-        }
+    .ct-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ct-muted);
+      margin-bottom: 18px;
+    }
+    .ct-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--ct-accent);
+    }
 
-        .contact-heading .period {
-          color: var(--accent);
-        }
+    .ct-title {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--ct-ink);
+      margin: 0;
+    }
+    .ct-title-em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ct-accent);
+    }
 
-        .contact-copy {
-          font-size: 14px;
-          line-height: 1.7;
-          color: #6b6b6b;
-          max-width: 340px;
-        }
+    .ct-header-right {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.85;
+      color: var(--ct-muted);
+      font-weight: 300;
+      max-width: 400px;
+      align-self: end;
+    }
 
-        .contact-cards {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-          margin-top: 28px;
-        }
+    /* ── BODY GRID ── */
+    .ct-body {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 1px;
+      background: var(--ct-border);
+      border-left: 1px solid var(--ct-border);
+      border-right: 1px solid var(--ct-border);
+      border-bottom: 1px solid var(--ct-border);
+    }
 
-        .contact-card {
-          background: #f5f5f5;
-          border: 1px solid #e4e4e4;
-          border-radius: 14px;
-          padding: 16px 18px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-          cursor: default;
-        }
+    /* ── LEFT ── */
+    .ct-left {
+      background: #ffffff;
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 40px;
+    }
 
-        .contact-card:hover {
-          background: #fafafa;
-          border-color: #ddd;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        }
+    .ct-avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--ct-border);
+      border-radius: 2px;
+      padding: 7px 14px;
+      width: fit-content;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ct-muted);
+      margin-bottom: 28px;
+    }
+    .ct-avail-dot {
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: ctPulse 2s infinite;
+    }
+    @keyframes ctPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
+      50%      { box-shadow: 0 0 0 5px rgba(74,222,128,0); }
+    }
 
-        .contact-card-icon {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background: rgba(0, 229, 255, 0.12);
-          border: 1px solid rgba(0, 229, 255, 0.25);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 14px;
-        }
+    .ct-left-heading {
+      font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      color: var(--ct-ink);
+      margin-bottom: 14px;
+    }
+    .ct-left-heading-em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ct-accent);
+    }
 
-        .contact-card-label {
-          font-size: 10px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.14em;
-          color: #888;
-        }
+    .ct-left-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      line-height: 1.85;
+      color: var(--ct-muted);
+      font-weight: 300;
+      margin-bottom: 36px;
+      max-width: 340px;
+    }
 
-        .contact-card-value {
-          font-size: 13px;
-          font-weight: 600;
-          color: #111;
-        }
+    /* contact method cards */
+    .ct-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--ct-border);
+      border: 1px solid var(--ct-border);
+      flex: 1;
+    }
+    .ct-method {
+      background: #ffffff;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .ct-method::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      z-index: 0;
+    }
+    .ct-method:hover::before { transform: scaleY(1); }
 
-        /* Right form card */
-        .contact-right {
-          background: #ffffff;
-          border-radius: 22px;
-          padding: 32px 28px 32px;
-          display: flex;
-          flex-direction: column;
-          gap: 18px;
-          box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        }
+    .ct-method-strip {
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px; height: 0%;
+      background: var(--ct-accent);
+      transition: height 0.4s cubic-bezier(0.16,1,0.3,1);
+      z-index: 2;
+    }
+    .ct-method:hover .ct-method-strip { height: 100%; }
 
-        .contact-form {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
+    .ct-method-icon {
+      position: relative;
+      z-index: 1;
+      width: 36px; height: 36px;
+      border: 1px solid var(--ct-border);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      color: var(--ct-muted);
+      flex-shrink: 0;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+    }
+    .ct-method:hover .ct-method-icon {
+      border-color: var(--ct-accent);
+      color: var(--ct-accent);
+      background: rgba(12,12,11,0.06);
+    }
+    .ct-method-text {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .ct-method-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ct-muted);
+      transition: color 0.3s;
+    }
+    .ct-method:hover .ct-method-label { color: rgba(12,12,11,0.45); }
+    .ct-method-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ct-ink);
+      letter-spacing: -0.01em;
+      transition: color 0.3s;
+    }
+    .ct-method:hover .ct-method-value { color: #0c0c0b; }
 
-        .contact-form-title {
-          font-size: 18px;
-          font-weight: 700;
-          color: #111;
-          letter-spacing: -0.02em;
-          margin: 0 0 4px;
-        }
+    /* ── RIGHT — FORM ── */
+    .ct-right {
+      background: #ffffff;
+      padding: 48px 40px;
+    }
 
-        .contact-form-row {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-        }
+    .ct-form-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ct-ink);
+      margin: 0 0 28px;
+    }
 
-        .contact-field {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
+    .ct-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-        .contact-field-label {
-          font-size: 11px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          color: #666;
-        }
+    .ct-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
 
-        .contact-input,
-        .contact-textarea {
-          background: #f8f8f8;
-          border: 1px solid #e4e4e4;
-          border-radius: 12px;
-          padding: 12px 14px;
-          font-size: 14px;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-          color: #111;
-          outline: none;
-          transition: border-color 0.2s, background 0.2s;
-        }
+    .ct-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
 
-        .contact-input:focus,
-        .contact-textarea:focus {
-          border-color: var(--accent);
-          background: #fff;
-        }
+    .ct-field-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ct-muted);
+    }
 
-        .contact-input::placeholder,
-        .contact-textarea::placeholder {
-          color: #999;
-        }
+    .ct-input,
+    .ct-textarea {
+      background: rgba(12, 2, 26, 0.02);
+      border: 1px solid var(--ct-border);
+      border-radius: 2px;
+      padding: 12px 14px;
+      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      color: var(--ct-ink);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .ct-input:focus,
+    .ct-textarea:focus {
+      border-color: var(--ct-accent);
+      background: rgba(255,77,28,0.04);
+    }
+    .ct-input::placeholder,
+    .ct-textarea::placeholder {
+      color: rgba(12, 2, 26, 0.35);
+      font-size: 0.75rem;
+    }
+    .ct-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
 
-        .contact-textarea {
-          min-height: 100px;
-          resize: vertical;
-        }
+    /* pricing pills */
+    .ct-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .ct-option {
+      border: 1px solid var(--ct-border);
+      border-radius: 2px;
+      padding: 10px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--ct-muted);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .ct-option.active {
+      border-color: var(--ct-accent);
+      color: var(--ct-ink);
+      background: rgba(255,77,28,0.08);
+    }
+    .ct-option:hover:not(.active) {
+      border-color: rgba(12, 2, 26, 0.15);
+      color: var(--ct-ink);
+    }
 
-        .contact-pricing-row {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
+    .ct-divider {
+      height: 1px;
+      background: var(--ct-border);
+    }
 
-        .contact-pricing-options {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 8px;
-        }
+    .ct-submit {
+      width: 100%;
+      border: none;
+      background: var(--ct-accent);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 15px 20px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 4px;
+    }
+    .ct-submit:hover { background: #ff6b3d; transform: translateX(3px); }
 
-        .contact-pricing-pill {
-          border-radius: 12px;
-          border: 1px solid #e4e4e4;
-          background: #f8f8f8;
-          padding: 10px 14px;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-          font-size: 12px;
-          font-weight: 500;
-          text-align: center;
-          color: #666;
-          cursor: pointer;
-          transition: background 0.2s, border-color 0.2s, color 0.2s;
-        }
+    .ct-submit-arrow {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      transition: transform 0.25s;
+    }
+    .ct-submit:hover .ct-submit-arrow { transform: rotate(45deg); }
 
-        .contact-pricing-pill.active {
-          background: rgba(0, 229, 255, 0.1);
-          border-color: var(--accent);
-          color: #111;
-        }
-
-        .contact-pricing-pill:hover:not(.active) {
-          background: #f0f0f0;
-          color: #111;
-        }
-
-        .contact-divider {
-          height: 1px;
-          background: #e4e4e4;
-        }
-
-        .contact-submit {
-          width: 100%;
-          border-radius: 12px;
-          border: none;
-          background: #111;
-          color: #fff;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-          font-size: 13px;
-          font-weight: 600;
-          letter-spacing: 0.06em;
-          padding: 14px 18px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-          margin-top: 4px;
-        }
-
-        .contact-submit:hover {
-          background: #222;
-          transform: translateY(-1px);
-          box-shadow: 0 12px 28px rgba(0,0,0,0.2);
-        }
-
-        .contact-submit-arrow {
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
-          background: var(--accent);
-          color: #111;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 12px;
-          font-weight: 700;
-          transition: transform 0.25s;
-        }
-
-        .contact-submit:hover .contact-submit-arrow {
-          transform: rotate(45deg);
-        }
-
-        @media (max-width: 1024px) {
-          .contact-section {
-            padding: 80px 14px 96px;
-          }
-          .contact-shell {
-            grid-template-columns: 1fr;
-            gap: 20px;
-          }
-          .contact-left {
-            min-height: auto;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .contact-section {
-            padding: 64px 12px 80px;
-          }
-          .contact-heading {
-            font-size: clamp(32px, 6vw, 42px);
-          }
-        }
-
-        @media (max-width: 640px) {
-          .contact-section {
-            padding: 56px 12px 72px;
-          }
-          .contact-cards {
-            grid-template-columns: 1fr;
-            margin-top: 24px;
-          }
-          .contact-form-row {
-            grid-template-columns: 1fr;
-          }
-          .contact-pricing-options {
-            grid-template-columns: 1fr;
-          }
-          .contact-left {
-            padding: 28px 22px;
-          }
-          .contact-right {
-            padding: 28px 22px;
-          }
-          .contact-heading {
-            font-size: 30px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .contact-section {
-            padding: 48px 10px 64px;
-          }
-          .contact-label {
-            font-size: 10px;
-            padding: 6px 12px;
-          }
-          .contact-heading {
-            font-size: 26px;
-          }
-          .contact-left,
-          .contact-right {
-            padding: 22px 18px;
-          }
-          .contact-form-title {
-            font-size: 16px;
-          }
-        }
-      `
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .ct-body { grid-template-columns: 1fr; }
+      .ct-header { grid-template-columns: 1fr; gap: 20px; }
+      .ct-left { padding: 36px 28px; }
+      .ct-right { padding: 36px 28px; }
+    }
+    @media (max-width: 640px) {
+      .ct-section { padding-bottom: 80px; }
+      .ct-header { padding: 60px 0 40px; }
+      .ct-title { font-size: 2.8rem; }
+      .ct-left { padding: 28px 20px; }
+      .ct-right { padding: 28px 20px; }
+      .ct-form-row { grid-template-columns: 1fr; }
+      .ct-options { grid-template-columns: 1fr; }
+    }
+  `
 
   return (
-    <section id="contact" className="contact-section">
-      <style dangerouslySetInnerHTML={{ __html: sectionStyles }} />
+    <section id="contact" className="ct-section">
+      <style dangerouslySetInnerHTML={{ __html: styles }} />
 
-      <div className="contact-shell">
+      <div className="ct-inner">
 
-        {/* Left */}
-        <div className="contact-left">
-          <div className="contact-left-inner">
+        {/* ── HEADER ── */}
+        <div className="ct-header">
+          <div>
+            <div className="ct-eyebrow">Contact</div>
+            <h2 className="ct-title">
+              Let's<br />
+              <span className="ct-title-em">Talk.</span>
+            </h2>
+          </div>
+          <p className="ct-header-right">
+            Got questions or ready to start your design project? Let's bring your ideas to life with a tailored plan that fits your team and timeline.
+          </p>
+        </div>
+
+        {/* ── BODY ── */}
+        <div className="ct-body">
+
+          {/* LEFT */}
+          <div className="ct-left">
             <div>
-              <div className="contact-label">
-                <span className="label-slashes">//</span>
-                <span>CONTACT</span>
-                <span className="label-slashes">//</span>
+              <div className="ct-avail">
+                <span className="ct-avail-dot" />
+                Available from March 2025
               </div>
-              <h2 className="contact-heading">
-                Let&apos;s Talk<span className="period">.</span>
-              </h2>
-              <p className="contact-copy">
-                Got questions or ready to start your design project? Let&apos;s bring your ideas to life with a tailored
-                plan that fits your team and timeline.
+
+              <h3 className="ct-left-heading">
+                Start a<br />
+                <span className="ct-left-heading-em">conversation.</span>
+              </h3>
+              <p className="ct-left-copy">
+                We're a small team that moves fast. Reach out directly and we'll get back to you within one business day.
               </p>
             </div>
 
-            <div className="contact-cards">
-              {contactMethods.map((method) => (
-                <div key={method.id} className="contact-card" {...hover}>
-                  <div className="contact-card-icon">
-                    {method.id === 'email' ? '✉' : '☎'}
-                  </div>
-                  <div>
-                    <div className="contact-card-label">{method.label}</div>
-                    <div className="contact-card-value">{method.value}</div>
+            <div className="ct-methods">
+              {contactMethods.map((m) => (
+                <div key={m.id} className="ct-method" {...hover}>
+                  <div className="ct-method-strip" />
+                  <div className="ct-method-icon">{m.icon}</div>
+                  <div className="ct-method-text">
+                    <span className="ct-method-label">{m.label}</span>
+                    <span className="ct-method-value">{m.value}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* RIGHT — FORM */}
+          <div className="ct-right">
+            <p className="ct-form-title">Send us a message</p>
+
+            <form className="ct-form" onSubmit={(e) => e.preventDefault()}>
+              <div className="ct-form-row">
+                <div className="ct-field">
+                  <label className="ct-field-label">Your name *</label>
+                  <input className="ct-input" placeholder="John Doe" name="name" autoComplete="name" />
+                </div>
+                <div className="ct-field">
+                  <label className="ct-field-label">E-mail *</label>
+                  <input className="ct-input" placeholder="you@email.com" type="email" name="email" autoComplete="email" />
+                </div>
+              </div>
+
+              <div className="ct-field">
+                <label className="ct-field-label">Website</label>
+                <input className="ct-input" placeholder="https://yoursite.com" name="website" />
+              </div>
+
+              <div className="ct-field">
+                <span className="ct-field-label">Pricing model</span>
+                <div className="ct-options">
+                  {pricingOptions.map((opt, i) => (
+                    <div key={opt} className={`ct-option${i === 0 ? ' active' : ''}`}>{opt}</div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="ct-field">
+                <label className="ct-field-label">Message</label>
+                <textarea className="ct-textarea" placeholder="Tell us about your project…" name="message" />
+              </div>
+
+              <div className="ct-divider" />
+
+              <button type="submit" className="ct-submit" {...hover}>
+                <span>Get in touch</span>
+                <span className="ct-submit-arrow">↗</span>
+              </button>
+            </form>
+          </div>
+
         </div>
-
-        {/* Right */}
-        <div className="contact-right">
-          <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-            <p className="contact-form-title">Send us a message</p>
-
-            <div className="contact-form-row">
-              <div className="contact-field">
-                <label className="contact-field-label">Your name *</label>
-                <input className="contact-input" placeholder="John Doe" name="name" autoComplete="name" />
-              </div>
-              <div className="contact-field">
-                <label className="contact-field-label">E-mail *</label>
-                <input className="contact-input" placeholder="you@email.com" type="email" name="email" autoComplete="email" />
-              </div>
-            </div>
-
-            <div className="contact-field">
-              <label className="contact-field-label">Website</label>
-              <input className="contact-input" placeholder="https://yoursite.com" name="website" />
-            </div>
-
-            <div className="contact-pricing-row">
-              <span className="contact-field-label">Pricing model</span>
-              <div className="contact-pricing-options">
-                <div className="contact-pricing-pill active">Design retainer</div>
-                <div className="contact-pricing-pill">Single project</div>
-              </div>
-            </div>
-
-            <div className="contact-field">
-              <label className="contact-field-label">Message</label>
-              <textarea className="contact-textarea" placeholder="Tell us about your project…" name="message" />
-            </div>
-
-            <div className="contact-divider" />
-
-            <button type="submit" className="contact-submit" {...hover}>
-              <span>Get in touch</span>
-              <span className="contact-submit-arrow">↗</span>
-            </button>
-          </form>
-        </div>
-
       </div>
     </section>
   )

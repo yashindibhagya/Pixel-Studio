@@ -5,285 +5,364 @@ import { useCursorHover } from '@/components/Cursor'
 const benefits = [
   {
     id: 'pricing',
+    num: '01',
     icon: '$',
     title: 'Predictable Pricing',
-    description: 'Simple pricing structure that gives you unlimited design.',
+    description: 'Simple pricing structure that gives you unlimited design. No hourly billing, no surprises — ever.',
   },
   {
     id: 'turnarounds',
+    num: '02',
     icon: '⏱',
     title: 'Fast Turnarounds',
-    description: 'Quick and reliable results to keep your business moving forward.',
+    description: 'Quick and reliable results to keep your business moving forward without waiting weeks.',
   },
   {
     id: 'requests',
+    num: '03',
     icon: '⟳',
     title: 'Unlimited Requests',
-    description: 'We’ll handle them one by one — or a few at a time on higher tiers.',
+    description: 'Submit as many requests as you need. We handle them one by one — or in parallel on higher tiers.',
   },
   {
     id: 'portal',
+    num: '04',
     icon: '↗',
     title: 'Design Portal',
-    description: 'Manage tasks, revisions, and updates inside a clean, organized dashboard.',
+    description: 'Manage tasks, revisions, and updates inside a clean, organized dashboard built for clarity.',
   },
   {
     id: 'quality',
+    num: '05',
     icon: '★',
     title: 'Top-Tier Quality',
-    description: 'Built with care by a team that treats your brand like their own.',
+    description: 'Built with care by a team that treats your brand like their own — every pixel intentional.',
   },
   {
     id: 'problems',
-    icon: '▮▮',
+    num: '06',
+    icon: '◈',
     title: 'Problem Solving',
-    description: 'We solve your brand challenges with innovative solutions.',
+    description: 'We dig into your brand challenges and surface innovative, strategy-backed solutions.',
   },
 ]
 
 export function Benefits() {
   const hover = useCursorHover()
 
-  const sectionStyles = `
-        .benefits-section {
-          background: #f4f4f4;
-          padding: 96px 16px 120px;
-          display: flex;
-          justify-content: center;
-        }
+  const styles = `
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap');
 
-        .benefits-container {
-          max-width: 1280px;
-          width: 100%;
-          margin: 0 auto;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-        }
+    :root {
+      --bn-bg: #F8F6FC;
+      --bn-ink: #0C021A;
+      --bn-muted: rgba(12, 2, 26, 0.6);
+      --bn-accent: #ff4d1c;
+      --bn-border: rgba(12, 2, 26, 0.08);
+    }
 
-        .benefits-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          gap: 32px;
-          margin-bottom: 32px;
-        }
+    .bn-section {
+      font-family: 'Syne', sans-serif;
+      background: var(--bn-bg);
+      color: var(--bn-ink);
+      padding: 0 0 120px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .benefits-label {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 8px 14px;
-          border-radius: 999px;
-          background: #111;
-          color: #ffffff;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          margin-bottom: 12px;
-        }
+    /* grain */
+    .bn-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .benefits-label .label-slashes {
-          color: var(--accent);
-        }
+    .bn-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 4vw;
+      position: relative;
+      z-index: 1;
+    }
 
-        .benefits-title {
-          font-size: clamp(46px, 6vw, 62px);
-          font-weight: 800;
-          letter-spacing: -0.04em;
-          margin: 0;
-          color: #111;
-        }
+    /* ── HEADER ── */
+    .bn-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 32px;
+      padding: 80px 0 56px;
+      border-bottom: 1px solid var(--bn-border);
+      margin-bottom: 0;
+    }
 
-        .benefits-title span.period {
-          color: #ff4d4d;
-        }
+    .bn-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bn-muted);
+      margin-bottom: 18px;
+    }
+    .bn-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--bn-accent);
+    }
 
-        .benefits-intro {
-          max-width: 360px;
-          font-size: 14px;
-          line-height: 1.7;
-          color: #6b6b6b;
-        }
+    .bn-title {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--bn-ink);
+      margin: 0;
+    }
+    .bn-title-em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--bn-accent);
+    }
 
-        .benefits-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 16px;
-        }
+    .bn-intro {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.85;
+      color: var(--bn-muted);
+      font-weight: 300;
+      max-width: 400px;
+      align-self: end;
+    }
 
-        .benefit-card {
-          background: #ffffff;
-          border-radius: 18px;
-          padding: 18px 18px 20px;
-          box-shadow: 0 14px 34px rgba(0,0,0,0.10);
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
+    /* ── GRID ── */
+    .bn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--bn-border);
+      border-left: 1px solid var(--bn-border);
+      border-right: 1px solid var(--bn-border);
+      border-bottom: 1px solid var(--bn-border);
+    }
 
-        .benefit-card-top {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-        }
+    /* ── CARD ── */
+    .bn-card {
+      background: #ffffff;
+      padding: 32px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .bn-card:hover { background: #f0ecff; }
 
-        .benefit-icon {
-          width: 28px;
-          height: 28px;
-          border-radius: 999px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: #f4f4f4;
-          font-size: 16px;
-        }
+    /* accent line that grows on hover */
+    .bn-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--bn-accent);
+      transition: width 0.4s cubic-bezier(.25,.46,.45,.94);
+    }
+    .bn-card:hover::after { width: 100%; }
 
-        .benefit-dots {
-          display: flex;
-          gap: 4px;
-          align-items: center;
-        }
+    /* top row: index + icon */
+    .bn-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .bn-card-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--bn-muted);
+    }
+    .bn-card-icon {
+      width: 36px; height: 36px;
+      border: 1px solid var(--bn-border);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      color: var(--bn-ink);
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+    }
+    .bn-card:hover .bn-card-icon {
+      border-color: var(--bn-accent);
+      color: var(--bn-accent);
+      background: rgba(255,77,28,0.08);
+    }
 
-        .benefit-dot {
-          width: 5px;
-          height: 5px;
-          border-radius: 999px;
-          background: #e4e4e4;
-        }
+    /* text */
+    .bn-card-title {
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--bn-ink);
+      margin: 0 0 10px;
+    }
+    .bn-card-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      line-height: 1.85;
+      color: var(--bn-muted);
+      font-weight: 300;
+      margin: 0;
+      flex: 1;
+    }
 
-        .benefit-dot.active {
-          background: #ff4d4d;
-        }
+    /* bottom divider + read more */
+    .bn-card-foot {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--bn-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .bn-card-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bn-muted);
+    }
+    .bn-card-arrow {
+      font-size: 0.75rem;
+      color: var(--bn-muted);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .bn-card:hover .bn-card-arrow {
+      color: var(--bn-accent);
+      transform: translate(2px, -2px);
+    }
 
-        .benefit-title {
-          font-size: 16px;
-          font-weight: 700;
-          letter-spacing: -0.03em;
-          margin-bottom: 4px;
-          color: #111;
-        }
+    /* ── FOOTER ── */
+    .bn-footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--bn-border);
+      border-left: 1px solid var(--bn-border);
+      border-right: 1px solid var(--bn-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+    .bn-footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--bn-muted);
+    }
+    .bn-footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,77,28,0.3);
+      border-radius: 2px;
+      padding: 7px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bn-accent);
+    }
+    .bn-footer-badge-dot {
+      width: 5px; height: 5px;
+      background: var(--bn-accent);
+      border-radius: 50%;
+      animation: bnPulse 2s infinite;
+    }
+    @keyframes bnPulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.2; }
+    }
 
-        .benefit-desc {
-          font-size: 13px;
-          line-height: 1.7;
-          color: #777;
-          margin: 0;
-        }
-
-        @media (max-width: 1280px) {
-          .benefits-grid {
-            gap: 14px;
-          }
-        }
-
-        @media (max-width: 1024px) {
-          .benefits-section {
-            padding: 80px 14px 96px;
-          }
-          .benefits-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .benefits-section {
-            padding: 64px 12px 80px;
-          }
-          .benefits-header {
-            gap: 24px;
-            margin-bottom: 28px;
-          }
-          .benefits-title {
-            font-size: clamp(36px, 8vw, 48px);
-          }
-        }
-
-        @media (max-width: 640px) {
-          .benefits-section {
-            padding: 56px 12px 72px;
-          }
-          .benefits-header {
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 24px;
-          }
-          .benefits-title {
-            font-size: 32px;
-          }
-          .benefits-intro {
-            max-width: 100%;
-          }
-          .benefits-grid {
-            grid-template-columns: 1fr;
-            gap: 12px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .benefits-section {
-            padding: 48px 10px 64px;
-          }
-          .benefits-label {
-            font-size: 10px;
-            padding: 6px 12px;
-          }
-          .benefits-title {
-            font-size: 28px;
-          }
-          .benefit-card {
-            padding: 16px 16px 18px;
-          }
-          .benefit-title {
-            font-size: 15px;
-          }
-        }
-      `
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .bn-grid { grid-template-columns: repeat(2, 1fr); }
+      .bn-header { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media (max-width: 640px) {
+      .bn-section { padding-bottom: 80px; }
+      .bn-header { padding: 60px 0 40px; }
+      .bn-title { font-size: 2.8rem; }
+      .bn-grid { grid-template-columns: 1fr; }
+      .bn-card { padding: 24px 20px 20px; }
+      .bn-footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    }
+  `
 
   return (
-    <section id="benefits" className="benefits-section">
-      <style dangerouslySetInnerHTML={{ __html: sectionStyles }} />
+    <section id="benefits" className="bn-section">
+      <style dangerouslySetInnerHTML={{ __html: styles }} />
 
-      <div className="benefits-container">
-        <div className="benefits-header">
+      <div className="bn-inner">
+
+        {/* ── HEADER ── */}
+        <div className="bn-header">
           <div>
-            <div className="benefits-label">
-              <span className="label-slashes">//</span>
-              <span>BENEFITS</span>
-              <span className="label-slashes">//</span>
-            </div>
-            <h2 className="benefits-title">
-              Our Benefits<span className="period">.</span>
+            <div className="bn-eyebrow">Benefits</div>
+            <h2 className="bn-title">
+              Our<br />
+              <span className="bn-title-em">Benefits.</span>
             </h2>
           </div>
-          <p className="benefits-intro">
+          <p className="bn-intro">
             Get unlimited design work for a simple monthly rate. No hourly billing, no surprises — pause or cancel whenever you need.
           </p>
         </div>
 
-        <div className="benefits-grid">
-          {benefits.map((benefit, index) => (
-            <article
-              key={benefit.id}
-              className="benefit-card"
-              {...hover}
-            >
-              <div className="benefit-card-top">
-                <div className="benefit-icon">{benefit.icon}</div>
-                <div className="benefit-dots">
-                  <span className="benefit-dot active" />
-                  <span className="benefit-dot" />
-                  <span className="benefit-dot" />
-                  <span className="benefit-dot" />
-                </div>
+        {/* ── CARDS ── */}
+        <div className="bn-grid">
+          {benefits.map((benefit) => (
+            <article key={benefit.id} className="bn-card" {...hover}>
+
+              <div className="bn-card-head">
+                <span className="bn-card-num">{benefit.num} /</span>
+                <span className="bn-card-icon">{benefit.icon}</span>
               </div>
-              <div>
-                <h3 className="benefit-title">{benefit.title}</h3>
-                <p className="benefit-desc">{benefit.description}</p>
+
+              <h3 className="bn-card-title">{benefit.title}</h3>
+              <p className="bn-card-desc">{benefit.description}</p>
+
+              <div className="bn-card-foot">
+                <span className="bn-card-tag">Learn more</span>
+                <span className="bn-card-arrow">↗</span>
               </div>
+
             </article>
           ))}
         </div>
+
+        {/* ── FOOTER STRIP ── */}
+        <div className="bn-footer">
+          <span className="bn-footer-note">Pause or cancel anytime — no contracts, no lock-in</span>
+          <span className="bn-footer-badge">
+            <span className="bn-footer-badge-dot" />
+            Currently accepting new clients
+          </span>
+        </div>
+
       </div>
     </section>
   )
