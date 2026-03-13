@@ -4,7 +4,7 @@ import { useCursorHover } from '@/components/Cursor'
 
 const testimonials = [
   {
-    text: 'Pixel Studio transformed our outdated platform into a revenue-generating machine. Conversion rates up 340% in the first quarter.',
+    text: 'Devora Labs transformed our outdated platform into a revenue-generating machine. Conversion rates up 340% in the first quarter.',
     name: 'Sarah Chen',
     role: 'CEO, NovaPay',
     initial: 'S',

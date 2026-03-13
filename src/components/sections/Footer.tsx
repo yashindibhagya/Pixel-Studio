@@ -365,11 +365,11 @@ export function Footer() {
           <div>
             <div className="ft-label">
               <span className="label-slashes">//</span>
-              <span>PIXEL.STUDIO</span>
+              <span>DEVORA LABS</span>
               <span className="label-slashes">//</span>
             </div>
             <h2 className="ft-wordmark">
-              Pixel<span className="period">.</span>Studio
+              Devora<span className="period">.</span>Labs
             </h2>
           </div>
 
@@ -425,7 +425,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="ft-bottom">
-          <span className="ft-meta">© 2025 Pixel Studio. All rights reserved.</span>
+          <span className="ft-meta">© 2025 Devora Labs. All rights reserved.</span>
 
           <div className="ft-badge">
             <span className="ft-badge-dot" />

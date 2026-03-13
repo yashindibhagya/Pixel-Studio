@@ -428,10 +428,10 @@ export function FAQ() {
               </p>
 
               <div className="fq-actions">
-                <Link href="mailto:hello@pixelstudio.io?subject=Book%20a%20free%20call" className="fq-btn-primary" {...hover}>
+                <Link href="mailto:infodevoralabs@gmail.com?subject=Book%20a%20free%20call" className="fq-btn-primary" {...hover}>
                   Book a free call ↗
                 </Link>
-                <Link href="mailto:hello@pixelstudio.io" className="fq-btn-ghost" {...hover}>
+                <Link href="mailto:infodevoralabs@gmail.com" className="fq-btn-ghost" {...hover}>
                   Drop us an email →
                 </Link>
               </div>

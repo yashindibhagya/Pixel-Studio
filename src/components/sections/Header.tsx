@@ -38,7 +38,7 @@ export function Header() {
       {/* ── NAV BAR ── */}
       <nav className={`hdr-bar${scrolled ? ' scrolled' : ''}`}>
         <Link href="#" className="hdr-logo" {...hover}>
-          Pixel<span className="hdr-logo-dot">.</span>Studio
+          Devora<span className="hdr-logo-dot">.</span>Labs
         </Link>
 
         <span className="hdr-center">Creative Digital Agency</span>
@@ -120,7 +120,7 @@ export function Header() {
             </Link>
           </div>
 
-          <span className="menu-big-num">PS</span>
+          <span className="menu-big-num">DL</span>
         </div>
 
       </div>

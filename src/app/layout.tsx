@@ -10,7 +10,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Pixel.Studio | We Build Digital Products That Grow',
+  title: 'Devora Labs | We Build Digital Products That Grow',
   description: 'Full-service digital agency specializing in web applications, mobile apps, and brand experiences that move markets.',
 }
 

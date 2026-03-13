@@ -7,7 +7,7 @@ const contactMethods = [
   {
     id: 'email',
     label: 'Write to sales',
-    value: 'sales@pixelstudio.io',
+    value: 'infodevoralabs@gmail.com',
     icon: '✉',
   },
   {

@@ -144,10 +144,36 @@ export function Services() {
       position: relative;
       overflow: hidden;
     }
-    .sv-card:hover { background: #f2ebe1; }
+    .sv-card:hover { background: #f0ecff; }
+
+    /* fill from bottom — same as Process */
+    .sv-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      z-index: 0;
+    }
+    .sv-card:hover::before { transform: scaleY(1); }
+
+    /* accent bar */
+    .sv-card-strip {
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px; height: 0%;
+      background: var(--sv-accent);
+      transition: height 0.45s cubic-bezier(0.16,1,0.3,1);
+      z-index: 3;
+    }
+    .sv-card:hover .sv-card-strip { height: 100%; }
 
     /* top meta row */
     .sv-card-meta {
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -158,7 +184,9 @@ export function Services() {
       font-size: 0.58rem;
       letter-spacing: 0.2em;
       color: var(--sv-muted);
+      transition: color 0.3s;
     }
+    .sv-card:hover .sv-card-num { color: rgba(12,12,11,0.35); }
     .sv-card-arrow {
       width: 28px; height: 28px;
       border: 1px solid var(--sv-border);
@@ -176,11 +204,12 @@ export function Services() {
 
     /* image */
     .sv-card-media {
+      position: relative;
+      z-index: 1;
       margin: 18px 24px 0;
       border-radius: 10px;
       overflow: hidden;
       height: 200px;
-      position: relative;
       flex-shrink: 0;
     }
     .sv-card-media-bg {
@@ -208,6 +237,8 @@ export function Services() {
 
     /* content */
     .sv-card-body {
+      position: relative;
+      z-index: 1;
       padding: 20px 24px 24px;
       display: flex;
       flex-direction: column;
@@ -220,7 +251,9 @@ export function Services() {
       line-height: 1.1;
       color: var(--sv-ink);
       margin-bottom: 10px;
+      transition: color 0.3s;
     }
+    .sv-card:hover .sv-card-title { color: #0c0c0b; }
     .sv-card-desc {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
@@ -229,7 +262,9 @@ export function Services() {
       font-weight: 300;
       flex: 1;
       margin-bottom: 20px;
+      transition: color 0.3s;
     }
+    .sv-card:hover .sv-card-desc { color: rgba(12,12,11,0.55); }
 
     /* tags */
     .sv-tags {
@@ -255,7 +290,7 @@ export function Services() {
     }
     .sv-card:hover .sv-tag {
       border-color: rgba(0,136,163,0.25);
-      color: rgba(24,19,12,0.8);
+      color: rgba(12,12,11,0.8);
     }
 
     /* ── FOOTER STRIP ── */
@@ -334,6 +369,7 @@ export function Services() {
         <div className="sv-grid">
           {services.map((service) => (
             <article key={service.id} className="sv-card" {...hover}>
+              <div className="sv-card-strip" aria-hidden />
 
               <div className="sv-card-meta">
                 <span className="sv-card-num">{service.num} /</span>
