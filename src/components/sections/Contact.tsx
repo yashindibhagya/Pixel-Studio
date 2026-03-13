@@ -30,12 +30,12 @@ export function Contact() {
       --ct-bg: #F8F6FC;
       --ct-ink: #0C021A;
       --ct-muted: rgba(12, 2, 26, 0.6);
-      --ct-accent: #ff4d1c;
+      --ct-accent: #0088A3;
       --ct-border: rgba(12, 2, 26, 0.08);
     }
 
     .ct-section {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--ct-bg);
       color: var(--ct-ink);
       padding: 0 0 120px;
@@ -263,7 +263,7 @@ export function Contact() {
     }
     .ct-method:hover .ct-method-label { color: rgba(12,12,11,0.45); }
     .ct-method-value {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       font-size: 0.88rem;
       font-weight: 700;
       color: var(--ct-ink);
@@ -329,7 +329,7 @@ export function Contact() {
     .ct-input:focus,
     .ct-textarea:focus {
       border-color: var(--ct-accent);
-      background: rgba(255,77,28,0.04);
+      background: rgba(0,136,163,0.04);
     }
     .ct-input::placeholder,
     .ct-textarea::placeholder {
@@ -363,7 +363,7 @@ export function Contact() {
     .ct-option.active {
       border-color: var(--ct-accent);
       color: var(--ct-ink);
-      background: rgba(255,77,28,0.08);
+      background: rgba(0,136,163,0.08);
     }
     .ct-option:hover:not(.active) {
       border-color: rgba(12, 2, 26, 0.15);

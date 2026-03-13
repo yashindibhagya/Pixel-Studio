@@ -7,10 +7,10 @@ export function Hero() {
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap');
 
     :root {
-      --hero-bg: #f9f5ee;
+      --hero-bg: #F8F6FC;
       --hero-ink: #18130c;
       --hero-muted: rgba(24,19,12,0.55);
-      --hero-accent: #ff4d1c;
+      --hero-accent: #0088A3;
       --hero-accent2: #ffb347;
       --hero-border: rgba(24,19,12,0.12);
     }
@@ -20,7 +20,7 @@ export function Hero() {
 
     /* ─── OUTER ─────────────────────────── */
     .h-wrap {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--hero-bg);
       color: var(--hero-ink);
       min-height: 100vh;
@@ -284,7 +284,7 @@ export function Hero() {
       flex-shrink: 0;
     }
     .h-avatar + .h-avatar { margin-left: -8px; }
-    .h-av1 { background: linear-gradient(135deg, #ff4d1c, #ff9b3d); }
+    .h-av1 { background: linear-gradient(135deg, #0088A3, #ff9b3d); }
     .h-av2 { background: linear-gradient(135deg, #38bdf8, #0ea5e9); }
     .h-av3 { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
     .h-av4 { background: linear-gradient(135deg, #4ade80, #16a34a); }

@@ -42,12 +42,12 @@ export function FAQ() {
       --fq-bg: #F8F6FC;
       --fq-ink: #0C021A;
       --fq-muted: rgba(12, 2, 26, 0.6);
-      --fq-accent: #ff4d1c;
+      --fq-accent: #0088A3;
       --fq-border: rgba(12, 2, 26, 0.08);
     }
 
     .fq-section {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--fq-bg);
       color: var(--fq-ink);
       padding: 0 0 120px;
@@ -306,7 +306,7 @@ export function FAQ() {
     }
 
     .fq-question {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       font-size: clamp(0.85rem, 1.2vw, 1rem);
       font-weight: 700;
       color: var(--fq-ink);
@@ -341,12 +341,12 @@ export function FAQ() {
     .fq-item.expanded .fq-toggle {
       border-color: var(--fq-accent);
       color: var(--fq-accent);
-      background: rgba(255,77,28,0.08);
+      background: rgba(0,136,163,0.08);
     }
     .fq-item.expanded:hover .fq-toggle {
       border-color: var(--fq-accent);
       color: var(--fq-accent);
-      background: rgba(255,77,28,0.12);
+      background: rgba(0,136,163,0.12);
     }
 
     .fq-answer-wrap {

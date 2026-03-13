@@ -9,7 +9,7 @@ const services = [
     title: 'UI/UX Design',
     description: 'Elevate your identity with sharp positioning, cohesive visuals, and interfaces that convert visitors into loyal users.',
     tags: ['Art Direction', 'Brand Strategy', 'Logo Design', 'Color Systems'],
-    gradient: 'linear-gradient(135deg, #ff4d1c 0%, #1a0a06 60%, #0c0c0b 100%)',
+    gradient: 'linear-gradient(135deg, #0088A3 0%, #1a0a06 60%, #0c0c0b 100%)',
   },
   {
     id: 'web-development',
@@ -36,15 +36,15 @@ export function Services() {
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap');
 
     :root {
-      --sv-bg: #f9f5ee;
+      --sv-bg: #F8F6FC;
       --sv-ink: #18130c;
       --sv-muted: rgba(24,19,12,0.55);
-      --sv-accent: #ff4d1c;
+      --sv-accent: #0088A3;
       --sv-border: rgba(24,19,12,0.12);
     }
 
     .sv-section {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--sv-bg);
       color: var(--sv-ink);
       padding: 0 0 120px;
@@ -254,7 +254,7 @@ export function Services() {
       white-space: nowrap;
     }
     .sv-card:hover .sv-tag {
-      border-color: rgba(255,77,28,0.25);
+      border-color: rgba(0,136,163,0.25);
       color: rgba(24,19,12,0.8);
     }
 
@@ -282,7 +282,7 @@ export function Services() {
       gap: 10px;
       background: var(--sv-accent);
       color: #fff;
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       font-weight: 700;
       font-size: 0.75rem;
       letter-spacing: 0.1em;

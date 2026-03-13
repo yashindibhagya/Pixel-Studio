@@ -97,12 +97,12 @@ export function Process() {
       --pc-bg: #F8F6FC;
       --pc-ink: #0C021A;
       --pc-muted: rgba(12, 2, 26, 0.6);
-      --pc-accent: #ff4d1c;
+      --pc-accent: #0088A3;
       --pc-border: rgba(12, 2, 26, 0.08);
     }
 
     .pc-section {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--pc-bg);
       color: var(--pc-ink);
       padding: 0 0 120px;
@@ -196,7 +196,7 @@ export function Process() {
       grid-template-columns: repeat(3, 1fr);
       align-items: start;
       gap: 1px;
-      background: var(--pc-border);
+      background: var(--pc-bg);
       border-left: 1px solid var(--pc-border);
       border-right: 1px solid var(--pc-border);
       border-bottom: 1px solid var(--pc-border);
@@ -310,7 +310,7 @@ export function Process() {
     .pc-title {
       position: relative;
       z-index: 1;
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       font-size: clamp(1.2rem, 1.8vw, 1.55rem);
       font-weight: 800;
       letter-spacing: -0.03em;

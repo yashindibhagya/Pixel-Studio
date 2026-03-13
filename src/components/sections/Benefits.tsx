@@ -57,12 +57,12 @@ export function Benefits() {
       --bn-bg: #F8F6FC;
       --bn-ink: #0C021A;
       --bn-muted: rgba(12, 2, 26, 0.6);
-      --bn-accent: #ff4d1c;
+      --bn-accent: #0088A3;
       --bn-border: rgba(12, 2, 26, 0.08);
     }
 
     .bn-section {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--bn-bg);
       color: var(--bn-ink);
       padding: 0 0 120px;
@@ -204,7 +204,7 @@ export function Benefits() {
     .bn-card:hover .bn-card-icon {
       border-color: var(--bn-accent);
       color: var(--bn-accent);
-      background: rgba(255,77,28,0.08);
+      background: rgba(0,136,163,0.08);
     }
 
     /* text */
@@ -277,7 +277,7 @@ export function Benefits() {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid rgba(255,77,28,0.3);
+      border: 1px solid rgba(0,136,163,0.3);
       border-radius: 2px;
       padding: 7px 14px;
       font-family: 'DM Mono', monospace;

@@ -33,12 +33,12 @@ export function Work() {
       --wk-bg: #F8F6FC;
       --wk-ink: #0C021A;
       --wk-muted: rgba(12, 2, 26, 0.6);
-      --wk-accent: #ff4d1c;
+      --wk-accent: #0088A3;
       --wk-border: rgba(12, 2, 26, 0.08);
     }
 
     .wk-section {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--wk-bg);
       color: var(--wk-ink);
       padding: 0 0 120px;
@@ -227,7 +227,7 @@ export function Work() {
       transition: color 0.35s;
     }
     .case-title {
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       font-size: clamp(1.8rem, 3.2vw, 2.8rem);
       font-weight: 800;
       letter-spacing: -0.04em;
