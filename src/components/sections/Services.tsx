@@ -125,18 +125,18 @@ export function Services() {
       align-self: end;
     }
 
-    /* ── GRID ── */
+    /* ── GRID ── (same background as Work section) */
     .sv-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
-      background: var(--sv-border);
+      background: var(--sv-bg);
       border: 1px solid var(--sv-border);
     }
 
-    /* ── CARD ── */
+    /* ── CARD ── (same hover as Work: fill from bottom + left strip) */
     .sv-card {
-      background: #ffffff;
+      background: transparent;
       display: flex;
       flex-direction: column;
       transition: background 0.3s;
@@ -144,9 +144,8 @@ export function Services() {
       position: relative;
       overflow: hidden;
     }
-    .sv-card:hover { background: #f0ecff; }
 
-    /* fill from bottom — same as Process */
+    /* white fill from bottom on hover */
     .sv-card::before {
       content: '';
       position: absolute;
@@ -159,10 +158,10 @@ export function Services() {
     }
     .sv-card:hover::before { transform: scaleY(1); }
 
-    /* accent bar */
+    /* left accent bar (same as Work) */
     .sv-card-strip {
       position: absolute;
-      top: 0; right: 0;
+      top: 0; left: 0;
       width: 3px; height: 0%;
       background: var(--sv-accent);
       transition: height 0.45s cubic-bezier(0.16,1,0.3,1);
@@ -273,7 +272,9 @@ export function Services() {
       gap: 7px;
       padding-top: 16px;
       border-top: 1px solid var(--sv-border);
+      transition: border-color 0.3s;
     }
+    .sv-card:hover .sv-tags { border-top-color: rgba(12,12,11,0.1); }
     .sv-tag {
       display: inline-flex;
       align-items: center;

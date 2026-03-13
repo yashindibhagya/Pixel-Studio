@@ -148,15 +148,15 @@ export function Benefits() {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
-      background: var(--bn-border);
+      background: var(--bn-bg);
       border-left: 1px solid var(--bn-border);
       border-right: 1px solid var(--bn-border);
       border-bottom: 1px solid var(--bn-border);
     }
 
-    /* ── CARD ── */
+    /* ── CARD ── (same hover as Work: fill from bottom + left strip) */
     .bn-card {
-      background: #ffffff;
+      background: transparent;
       padding: 32px 28px 28px;
       display: flex;
       flex-direction: column;
@@ -166,21 +166,36 @@ export function Benefits() {
       transition: background 0.3s;
       cursor: default;
     }
-    .bn-card:hover { background: #f0ecff; }
 
-    /* accent line that grows on hover */
-    .bn-card::after {
+    /* white fill from bottom on hover */
+    .bn-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 0; height: 2px;
-      background: var(--bn-accent);
-      transition: width 0.4s cubic-bezier(.25,.46,.45,.94);
+      inset: 0;
+      background: #ffffff;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      z-index: 0;
     }
-    .bn-card:hover::after { width: 100%; }
+    .bn-card:hover::before { transform: scaleY(1); }
+
+    /* left accent bar */
+    .bn-card-strip {
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0%;
+      background: var(--bn-accent);
+      transition: height 0.45s cubic-bezier(0.16,1,0.3,1);
+      z-index: 3;
+    }
+    .bn-card:hover .bn-card-strip { height: 100%; }
 
     /* top row: index + icon */
     .bn-card-head {
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -191,7 +206,9 @@ export function Benefits() {
       font-size: 0.55rem;
       letter-spacing: 0.2em;
       color: var(--bn-muted);
+      transition: color 0.35s;
     }
+    .bn-card:hover .bn-card-num { color: rgba(12,12,11,0.35); }
     .bn-card-icon {
       width: 36px; height: 36px;
       border: 1px solid var(--bn-border);
@@ -209,14 +226,20 @@ export function Benefits() {
 
     /* text */
     .bn-card-title {
+      position: relative;
+      z-index: 1;
       font-size: clamp(1.05rem, 1.6vw, 1.3rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.15;
       color: var(--bn-ink);
       margin: 0 0 10px;
+      transition: color 0.3s;
     }
+    .bn-card:hover .bn-card-title { color: #0c0c0b; }
     .bn-card-desc {
+      position: relative;
+      z-index: 1;
       font-family: 'DM Mono', monospace;
       font-size: 0.68rem;
       line-height: 1.85;
@@ -224,24 +247,32 @@ export function Benefits() {
       font-weight: 300;
       margin: 0;
       flex: 1;
+      transition: color 0.3s;
     }
+    .bn-card:hover .bn-card-desc { color: rgba(12,12,11,0.55); }
 
     /* bottom divider + read more */
     .bn-card-foot {
+      position: relative;
+      z-index: 1;
       margin-top: 24px;
       padding-top: 16px;
       border-top: 1px solid var(--bn-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      transition: border-color 0.3s;
     }
+    .bn-card:hover .bn-card-foot { border-top-color: rgba(12,12,11,0.1); }
     .bn-card-tag {
       font-family: 'DM Mono', monospace;
       font-size: 0.52rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--bn-muted);
+      transition: color 0.3s;
     }
+    .bn-card:hover .bn-card-tag { color: rgba(12,12,11,0.5); }
     .bn-card-arrow {
       font-size: 0.75rem;
       color: var(--bn-muted);
@@ -336,6 +367,7 @@ export function Benefits() {
         <div className="bn-grid">
           {benefits.map((benefit) => (
             <article key={benefit.id} className="bn-card" {...hover}>
+              <div className="bn-card-strip" aria-hidden />
 
               <div className="bn-card-head">
                 <span className="bn-card-num">{benefit.num} /</span>

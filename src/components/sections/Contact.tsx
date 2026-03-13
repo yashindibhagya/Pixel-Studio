@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
+import emailjs from '@emailjs/browser'
 import { useCursorHover } from '@/components/Cursor'
 
 const contactMethods = [
@@ -20,8 +22,79 @@ const contactMethods = [
 
 const pricingOptions = ['Design retainer', 'Single project', 'Brand identity', 'Other']
 
+type FormStatus = 'idle' | 'sending' | 'success' | 'error'
+
 export function Contact() {
   const hover = useCursorHover()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [website, setWebsite] = useState('')
+  const [message, setMessage] = useState('')
+  const [pricingModel, setPricingModel] = useState(pricingOptions[0])
+  const [status, setStatus] = useState<FormStatus>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+
+    if (!publicKey || !serviceId || !templateId) {
+      setStatus('error')
+      setErrorMessage('Email is not configured. Please add EmailJS keys to .env.local.')
+      return
+    }
+
+    setStatus('sending')
+    setErrorMessage('')
+
+    const safeName = String(name).trim() || '(no name)'
+    const safeEmail = String(email).trim() || '(not provided)'
+    const safeWebsite = String(website).trim() || '(not provided)'
+    const safePricing = String(pricingModel).trim() || 'Other'
+    const safeMessage = String(message)
+
+    const content = [
+      'New contact form message',
+      '',
+      `From: ${safeName} (${safeEmail})`,
+      `Website: ${safeWebsite}`,
+      `Pricing interest: ${safePricing}`,
+      '',
+      'Message:',
+      safeMessage || '(no message)',
+    ].join('\n')
+
+    const templateParams: Record<string, string> = {
+      title: 'New contact form message',
+      from_name: safeName,
+      from_email: safeEmail,
+      website: safeWebsite,
+      pricing_model: safePricing,
+      message: safeMessage || '(no message)',
+      name: safeName,
+      email: safeEmail,
+      content,
+    }
+
+    try {
+      await emailjs.send(serviceId as string, templateId as string, templateParams, publicKey as string)
+      // Do NOT clear fields – keep the form as-is
+      setStatus('success')
+    } catch (err: unknown) {
+      setStatus('error')
+      const msg =
+        err && typeof err === 'object' && 'text' in err
+          ? String((err as { text: string }).text)
+          : err instanceof Error
+            ? err.message
+            : 'Something went wrong while sending your message. Please email us directly.'
+      setErrorMessage(msg)
+      console.error('EmailJS error:', err)
+    }
+  }
 
   const styles = `
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap');
@@ -369,6 +442,33 @@ export function Contact() {
       border-color: rgba(12, 2, 26, 0.15);
       color: var(--ct-ink);
     }
+    .ct-option {
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .ct-option:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .ct-form-feedback {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      padding: 12px 14px;
+      border-radius: 2px;
+      margin-bottom: 18px;
+    }
+    .ct-form-feedback-success {
+      background: rgba(0, 136, 163, 0.1);
+      border: 1px solid rgba(0, 136, 163, 0.3);
+      color: var(--ct-ink);
+    }
+    .ct-form-feedback-error {
+      background: rgba(200, 60, 60, 0.08);
+      border: 1px solid rgba(200, 60, 60, 0.25);
+      color: #0C021A;
+    }
 
     .ct-divider {
       height: 1px;
@@ -483,42 +583,106 @@ export function Contact() {
           <div className="ct-right">
             <p className="ct-form-title">Send us a message</p>
 
-            <form className="ct-form" onSubmit={(e) => e.preventDefault()}>
+            <form className="ct-form" onSubmit={handleSubmit}>
+              {status === 'success' && (
+                <p className="ct-form-feedback ct-form-feedback-success">
+                  Our contact form is currently under maintenance. Please email your project
+                  details to <span className="ct-method-value">infodevoralabs@gmail.com</span>.
+                  Your input has been kept in the form, so you can copy and paste it into your
+                  email.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="ct-form-feedback ct-form-feedback-error">{errorMessage}</p>
+              )}
+
               <div className="ct-form-row">
                 <div className="ct-field">
                   <label className="ct-field-label">Your name *</label>
-                  <input className="ct-input" placeholder="John Doe" name="name" autoComplete="name" />
+                  <input
+                    className="ct-input"
+                    placeholder="John Doe"
+                    name="name"
+                    autoComplete="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    disabled={status === 'sending'}
+                  />
                 </div>
                 <div className="ct-field">
                   <label className="ct-field-label">E-mail *</label>
-                  <input className="ct-input" placeholder="you@email.com" type="email" name="email" autoComplete="email" />
+                  <input
+                    className="ct-input"
+                    placeholder="you@email.com"
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={status === 'sending'}
+                  />
                 </div>
               </div>
 
               <div className="ct-field">
                 <label className="ct-field-label">Website</label>
-                <input className="ct-input" placeholder="https://yoursite.com" name="website" />
+                <input
+                  className="ct-input"
+                  placeholder="https://yoursite.com"
+                  name="website"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  disabled={status === 'sending'}
+                />
               </div>
 
               <div className="ct-field">
                 <span className="ct-field-label">Pricing model</span>
                 <div className="ct-options">
-                  {pricingOptions.map((opt, i) => (
-                    <div key={opt} className={`ct-option${i === 0 ? ' active' : ''}`}>{opt}</div>
+                  {pricingOptions.map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`ct-option${pricingModel === opt ? ' active' : ''}`}
+                      onClick={() => setPricingModel(opt)}
+                      disabled={status === 'sending'}
+                    >
+                      {opt}
+                    </button>
                   ))}
                 </div>
               </div>
 
               <div className="ct-field">
                 <label className="ct-field-label">Message</label>
-                <textarea className="ct-textarea" placeholder="Tell us about your project…" name="message" />
+                <textarea
+                  className="ct-textarea"
+                  placeholder="Tell us about your project…"
+                  name="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  disabled={status === 'sending'}
+                />
               </div>
 
               <div className="ct-divider" />
 
-              <button type="submit" className="ct-submit" {...hover}>
-                <span>Get in touch</span>
-                <span className="ct-submit-arrow">↗</span>
+              <button
+                type="submit"
+                className="ct-submit"
+                disabled={status === 'sending'}
+                {...hover}
+              >
+                {status === 'sending' ? (
+                  <span>Sending…</span>
+                ) : (
+                  <>
+                    <span>Get in touch</span>
+                    <span className="ct-submit-arrow">↗</span>
+                  </>
+                )}
               </button>
             </form>
           </div>
