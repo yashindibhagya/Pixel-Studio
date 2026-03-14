@@ -1714,13 +1714,23 @@ footer {
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 2.5rem;
+  justify-content: center;
+  padding: 0;
   height: 72px;
   transition: background 0.4s ease, backdrop-filter 0.4s ease;
   background: rgba(248, 246, 252, 0.92);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(12, 2, 26, 0.08);
+}
+
+.hdr-inner {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .hdr-bar.scrolled {
@@ -2135,10 +2145,6 @@ footer {
 
   .menu-left {
     padding: 7rem 1.8rem 3rem;
-  }
-
-  .hdr-bar {
-    padding: 0 1.4rem;
   }
 
   .hdr-toggle-label {

@@ -37,25 +37,27 @@ export function Header() {
     <>
       {/* ── NAV BAR ── */}
       <nav className={`hdr-bar${scrolled ? ' scrolled' : ''}`}>
-        <Link href="#" className="hdr-logo" {...hover}>
-          Devora<span className="hdr-logo-dot">.</span>Labs
-        </Link>
+        <div className="hdr-inner">
+          <Link href="#" className="hdr-logo" {...hover}>
+            Devora<span className="hdr-logo-dot">.</span>Labs
+          </Link>
 
-        <span className="hdr-center">Creative Digital Agency</span>
+          <span className="hdr-center">Creative Digital Agency</span>
 
-        <button
-          type="button"
-          className={`hdr-toggle${menuOpen ? ' open' : ''}`}
-          onClick={() => setMenuOpen((o) => !o)}
-          {...hover}
-          aria-label="Toggle menu"
-        >
-          <span className="hdr-toggle-label">{menuOpen ? 'Close' : 'Menu'}</span>
-          <span className="hdr-toggle-icon">
-            <span />
-            <span />
-          </span>
-        </button>
+          <button
+            type="button"
+            className={`hdr-toggle${menuOpen ? ' open' : ''}`}
+            onClick={() => setMenuOpen((o) => !o)}
+            {...hover}
+            aria-label="Toggle menu"
+          >
+            <span className="hdr-toggle-label">{menuOpen ? 'Close' : 'Menu'}</span>
+            <span className="hdr-toggle-icon">
+              <span />
+              <span />
+            </span>
+          </button>
+        </div>
       </nav>
 
       {/* ── FULLSCREEN OVERLAY ── */}

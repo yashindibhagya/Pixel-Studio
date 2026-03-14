@@ -79,27 +79,36 @@ export function Hero() {
       to   { transform: translateX(-50%); }
     }
 
+    /* ─── INNER (match Benefits section padding) ─── */
+    .h-inner {
+      flex: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 4vw;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
     /* ─── MAIN GRID ─────────────────────── */
     .h-main {
-      flex: 1;
       display: grid;
       grid-template-columns: 1fr 420px;
       grid-template-rows: auto 1fr;
       gap: 0;
       position: relative;
-      z-index: 1;
+      min-height: calc(100vh - 72px - 46px);
     }
 
     /* ─── LEFT ──────────────────────────── */
     .h-left {
       grid-column: 1;
       grid-row: 1 / 3;
-      padding: 5vw 4vw 4vw;
+      padding: 5vw 0 4vw;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       border-right: 1px solid var(--hero-border);
-      min-height: calc(100vh - 72px - 46px);
     }
 
     /* availability badge */
@@ -322,7 +331,7 @@ export function Hero() {
         border-right: none;
         border-bottom: 1px solid var(--hero-border);
         min-height: unset;
-        padding: 6vw 5vw;
+        padding: 6vw 0;
       }
       .h-right {
         grid-column: 1; grid-row: 2;
@@ -340,7 +349,7 @@ export function Hero() {
       .h-stat:nth-child(2) { border-right: none; }
       .h-stat:nth-child(3) { border-top: 1px solid var(--hero-border); border-right: 1px solid var(--hero-border); }
       .h-headline { font-size: clamp(2.6rem, 12vw, 4rem); }
-      .h-left { padding: 8vw 5vw 6vw; }
+      .h-left { padding: 8vw 0 6vw; }
     }
   `
 
@@ -368,7 +377,8 @@ export function Hero() {
         </div>
 
         {/* ── MAIN GRID ── */}
-        <div className="h-main">
+        <div className="h-inner">
+          <div className="h-main">
 
           {/* LEFT */}
           <div className="h-left">
@@ -435,6 +445,7 @@ export function Hero() {
             </div>
           </div>
 
+          </div>
         </div>
       </section>
     </>
