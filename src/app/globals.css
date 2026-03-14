@@ -1764,7 +1764,7 @@ footer {
 }
 
 .hdr-bar.scrolled .hdr-logo-dot {
-  color: #e8ff47;
+  color: #0088A3;
 }
 
 .hdr-center {
@@ -1816,8 +1816,8 @@ footer {
 }
 
 .hdr-bar.scrolled .hdr-toggle:hover {
-  border-color: #e8ff47;
-  background: rgba(232,255,71,0.06);
+  border-color: #0088A3;
+  background: rgba(0,136,163,0.06);
 }
 
 .hdr-toggle-icon {
@@ -1892,7 +1892,7 @@ footer {
   right: -40px;
   width: 220px;
   height: 220px;
-  background: radial-gradient(circle, rgba(232,255,71,0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,136,163,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -1984,7 +1984,7 @@ footer {
 
 .menu-nav a:hover,
 .menu-nav a.is-hovered {
-  color: #e8ff47;
+  color: #0088A3;
 }
 
 .menu-nav a .link-arrow {
@@ -1992,7 +1992,7 @@ footer {
   opacity: 0;
   transform: translateX(-6px);
   transition: opacity 0.2s, transform 0.2s;
-  color: #e8ff47;
+  color: #0088A3;
 }
 
 .menu-nav a:hover .link-arrow {
@@ -2012,7 +2012,7 @@ footer {
 }
 
 .menu-nav a:hover .link-num {
-  color: rgba(232,255,71,0.5);
+  color: rgba(0,136,163,0.5);
 }
 
 .link-label-wrap {
@@ -2049,15 +2049,15 @@ footer {
 }
 
 .menu-overlay.is-open .menu-big-num {
-  color: rgba(232,255,71,0.07);
+  color: rgba(0,136,163,0.07);
 }
 
 .menu-tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid rgba(232,255,71,0.3);
-  color: #e8ff47;
+  border: 1px solid rgba(0,136,163,0.3);
+  color: #0088A3;
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.2em;
@@ -2070,7 +2070,7 @@ footer {
 .menu-tag-dot {
   width: 5px;
   height: 5px;
-  background: #e8ff47;
+  background: #0088A3;
   border-radius: 50%;
   animation: blink 1.6s infinite;
 }
@@ -2104,14 +2104,14 @@ footer {
 }
 
 .menu-stat-value span {
-  color: #e8ff47;
+  color: #0088A3;
 }
 
 .menu-cta {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #e8ff47;
+  background: #0088A3;
   color: #0a0a0a;
   text-decoration: none;
   font-family: 'DM Mono', monospace;
