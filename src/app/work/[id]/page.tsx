@@ -14,13 +14,13 @@ const projectImages: Record<
     alt: string
   }
 > = {
-  nova: {
-    src: 'https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    alt: 'Fintech analytics dashboard with charts and cards',
+  mawprint: {
+    src: 'https://images.pexels.com/photos/6444/pencil-typography-black-design.jpg?auto=compress&cs=tinysrgb&w=1600',
+    alt: 'MawPrint brand and web design',
   },
-  flux: {
-    src: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    alt: 'Fitness mobile app screens showing daily activity rings',
+  'mawprint-dashboard': {
+    src: 'https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    alt: 'MawPrint operations dashboard interface',
   },
   terrain: {
     src: 'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=1600',
@@ -414,52 +414,55 @@ function renderCaseBody(id: string) {
       next: string
     }
   > = {
-    nova: {
+    mawprint: {
       overview:
-        'NovaPay came to us with a powerful financial product wrapped in a dated, hard-to-navigate dashboard. Teams struggled to see what mattered, and self-serve upgrades were nearly invisible.',
+        "The CEO of MawPrint came to us with a clear goal: build a brand-new website from the ground up that properly represented who they are and what they deliver. The existing online presence was outdated and failed to communicate the quality and range of their print services.",
       did: [
-        'Mapped the full billing and upgrade journey across web and in-app surfaces',
-        'Redesigned the dashboard around key revenue and usage signals',
-        'Introduced clear upgrade paths and contextual upsell moments',
-        'Built a flexible UI system that could support new product lines',
+        "Kicked off with a direct briefing session with the CEO to capture vision, tone, and requirements",
+        "Defined the brand direction, visual language, and site architecture",
+        "Designed and built the full website from scratch, tailored to the print industry",
+        "Created clear service pages that communicate MawPrint’s capabilities at a glance",
+        "Delivered a fully responsive, fast, and production-ready site at mawprint.com",
       ],
       results: [
-        '37% lift in paid conversions within three months of launch',
-        'Shorter time-to-value for new workspaces',
-        'Significant reduction in support tickets around billing and plans',
+        "Live professional website at mawprint.com, delivered to spec",
+        "Clean service structure that makes it easy for clients to understand offerings",
+        "Modern visual identity that reflects the quality of MawPrint’s work",
       ],
       next:
-        "We’re now partnering with NovaPay on experimentation and A/B testing to keep iterating on the most valuable flows for new and existing customers.",
+        "Following the website launch, the MawPrint team came back to us to build an internal dashboard to manage their growing operations — see Project 02.",
     },
-    flux: {
+    "mawprint-dashboard": {
       overview:
-        'Flux wanted to be the daily companion for people building healthier habits, but the old app made it hard to understand progress or feel rewarded for consistency.',
+        "With their new website live, MawPrint needed a way to manage their internal operations more efficiently. The CEO wanted a single dashboard where the team could track jobs, manage client work, and stay on top of their workload — without juggling spreadsheets.",
       did: [
-        'Refined the core loop around goals, sessions, and streaks',
-        'Designed an adaptive home screen that changes with time of day',
-        'Created a motion system that makes closing rings feel tactile and satisfying',
-        'Partnered with the in-house team on implementation-ready Figma specs',
+        "Ran a requirements session with the MawPrint team to map their daily workflow",
+        "Designed the full UX for job creation, status tracking, and client management",
+        "Built and deployed the dashboard at formdesk-mawprint.vercel.app",
+        "Structured the data model around how the MawPrint team actually works",
+        "Iterated quickly based on direct feedback from the team during build",
       ],
       results: [
-        'Increased day-7 retention in the main markets',
-        'Higher completion rate for weekly challenges',
-        'Consistently higher app store ratings post-launch',
+        "Operational dashboard live and in active daily use by the MawPrint team",
+        "Centralised view of all active jobs, clients, and outstanding work",
+        "Replaced manual tracking and reduced time spent on coordination",
       ],
-      next: 'The next phase focuses on social features and lightweight communities to keep users motivated over the long term.',
+      next:
+        "We continue to support MawPrint with ongoing improvements to the dashboard as their team and operations grow.",
     },
     terrain: {
       overview:
-        'Terrain is a multi-location outdoor retailer with a deep catalog and highly seasonal inventory. Their legacy storefront couldn\'t surface the right products at the right time.',
+        "Terrain is a multi-location outdoor retailer with a deep catalog and highly seasonal inventory. Their legacy storefront couldn’t surface the right products at the right time.",
       did: [
-        'Replatformed the site to a modern, headless commerce stack',
-        'Redesigned navigation around activities instead of product categories',
-        'Crafted rich product storytelling templates for premium lines',
-        'Optimised checkout for both desktop and on-the-go mobile shoppers',
+        "Replatformed the site to a modern, headless commerce stack",
+        "Redesigned navigation around activities instead of product categories",
+        "Crafted rich product storytelling templates for premium lines",
+        "Optimised checkout for both desktop and on-the-go mobile shoppers",
       ],
       results: [
-        'Higher average order value on curated collections',
-        'Faster page loads across key landing pages',
-        'More flexible merchandising options for the internal team',
+        "Higher average order value on curated collections",
+        "Faster page loads across key landing pages",
+        "More flexible merchandising options for the internal team",
       ],
       next:
         "We’re continuing to support Terrain with seasonal campaign pages and experimentation on their product detail layouts.",
@@ -468,10 +471,10 @@ function renderCaseBody(id: string) {
 
   const c = cases[id] ?? {
     overview:
-      'We partner with teams to clarify the product story, clean up critical flows, and ship the visual systems that make everything feel intentional.',
+      "We partner with teams to clarify the product story, clean up critical flows, and ship the visual systems that make everything feel intentional.",
     did: [],
     results: [],
-    next: '',
+    next: "",
   }
 
   return (
@@ -567,6 +570,19 @@ export default function ProjectDetailPage({ params }: Props) {
                 <span className="cp-meta-label">Scope</span>
                 <span className="cp-meta-value">Strategy · UX · UI</span>
               </div>
+              {project.url && (
+                <div className="cp-meta-item">
+                  <span className="cp-meta-label">Live site</span>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ fontSize: '0.875rem', color: 'var(--accent)', fontWeight: 400, textDecoration: 'none' }}
+                  >
+                    {project.url.replace(/https?:\/\//, '')} ↗
+                  </a>
+                </div>
+              )}
             </div>
 
             {heroImage && (

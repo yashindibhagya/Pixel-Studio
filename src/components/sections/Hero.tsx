@@ -380,70 +380,70 @@ export function Hero() {
         <div className="h-inner">
           <div className="h-main">
 
-          {/* LEFT */}
-          <div className="h-left">
-            <div>
-              <div className="h-badge">
-                <span className="h-badge-dot" />
-                Available for projects
+            {/* LEFT */}
+            <div className="h-left">
+              <div>
+                <div className="h-badge">
+                  <span className="h-badge-dot" />
+                  Available for projects
+                </div>
+
+                <h1 className="h-headline">
+                  World-Class
+                  <span className="h-headline-em">Design</span>
+                  <span className="h-headline-ghost">Partner.</span>
+                </h1>
               </div>
 
-              <h1 className="h-headline">
-                World-Class
-                <span className="h-headline-em">Design</span>
-                <span className="h-headline-ghost">Partner.</span>
-              </h1>
-            </div>
+              <div className="h-left-foot">
+                <p className="h-desc">
+                  <strong>Design subscriptions</strong> for AI-powered startups.<br />
+                  Strategy, UI/UX, branding and motion — all in one flat monthly fee.
+                  Ship faster. Look better. <strong>Grow with confidence.</strong>
+                </p>
 
-            <div className="h-left-foot">
-              <p className="h-desc">
-                <strong>Design subscriptions</strong> for AI-powered startups.<br />
-                Strategy, UI/UX, branding and motion — all in one flat monthly fee.
-                Ship faster. Look better. <strong>Grow with confidence.</strong>
-              </p>
-
-              <div className="h-actions">
-                <Link href="#pricing" className="h-btn-primary">
-                  View Pricing ↗
-                </Link>
-                <Link href="#contact" className="h-btn-ghost">
-                  Get in touch →
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT */}
-          <div className="h-right">
-            <div className="h-stats">
-              <div className="h-stat">
-                <div className="h-stat-num">120<span>+</span></div>
-                <div className="h-stat-label">Projects delivered</div>
-              </div>
-              <div className="h-stat">
-                <div className="h-stat-num">100<span>+</span></div>
-                <div className="h-stat-label">Happy clients</div>
-              </div>
-              <div className="h-stat">
-                <div className="h-stat-num">07<span>yrs</span></div>
-                <div className="h-stat-label">In the craft</div>
+                <div className="h-actions">
+                  <Link href="#pricing" className="h-btn-primary">
+                    View Pricing ↗
+                  </Link>
+                  <Link href="#contact" className="h-btn-ghost">
+                    Get in touch →
+                  </Link>
+                </div>
               </div>
             </div>
 
-            <div className="h-proof">
-              <div className="h-avatars">
-                <div className="h-avatar h-av1">A</div>
-                <div className="h-avatar h-av2">B</div>
-                <div className="h-avatar h-av3">C</div>
-                <div className="h-avatar h-av4">D</div>
+            {/* RIGHT */}
+            <div className="h-right">
+              <div className="h-stats">
+                <div className="h-stat">
+                  <div className="h-stat-num">10<span>+</span></div>
+                  <div className="h-stat-label">Successful Projects</div>
+                </div>
+                <div className="h-stat">
+                  <div className="h-stat-num">100<span>%</span></div>
+                  <div className="h-stat-label">Client Satisfaction</div>
+                </div>
+                <div className="h-stat">
+                  <div className="h-stat-num">24/<span>7</span></div>
+                  <div className="h-stat-label">Support & Maintenance</div>
+                </div>
               </div>
-              <div className="h-proof-text">
-                <span className="h-proof-stars">★★★★★</span>
-                <span className="h-proof-main">Trusted by 100+ businesses</span>
-                <span className="h-proof-sub">They hit their targets — you're next.</span>
+
+              <div className="h-proof">
+                <div className="h-avatars">
+                  <div className="h-avatar h-av1">A</div>
+                  <div className="h-avatar h-av2">B</div>
+                  <div className="h-avatar h-av3">C</div>
+                  <div className="h-avatar h-av4">D</div>
+                </div>
+                <div className="h-proof-text">
+                  <span className="h-proof-stars">★★★★★</span>
+                  <span className="h-proof-main">Trusted by 10+ businesses</span>
+                  <span className="h-proof-sub">They hit their targets — you're next.</span>
+                </div>
               </div>
             </div>
-          </div>
 
           </div>
         </div>

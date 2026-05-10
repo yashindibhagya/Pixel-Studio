@@ -9,7 +9,6 @@ const navLinks = [
   { label: 'Services', href: '#services' },
   { label: 'Benefits', href: '#benefits' },
   { label: 'Work', href: '#work' },
-  { label: 'Pricing', href: '#pricing' },
   { label: 'Reviews', href: '#reviews' },
   { label: 'FAQs', href: '#faqs' },
   { label: 'Contact', href: '#contact' },
@@ -99,20 +98,20 @@ export function Header() {
 
             <div className="menu-stat-grid">
               <div>
-                <div className="menu-stat-label">Projects done</div>
-                <div className="menu-stat-value">120<span>+</span></div>
+                <div className="menu-stat-label">Successful Projects</div>
+                <div className="menu-stat-value">10<span>+</span></div>
               </div>
               <div>
-                <div className="menu-stat-label">Happy clients</div>
-                <div className="menu-stat-value">84<span>+</span></div>
+                <div className="menu-stat-label">Client Satisfaction</div>
+                <div className="menu-stat-value">100<span>%</span></div>
               </div>
               <div>
-                <div className="menu-stat-label">Years active</div>
-                <div className="menu-stat-value">07<span>yrs</span></div>
+                <div className="menu-stat-label">Hours of Development</div>
+                <div className="menu-stat-value">10,000<span>+</span></div>
               </div>
               <div>
-                <div className="menu-stat-label">Awards</div>
-                <div className="menu-stat-value">12<span>×</span></div>
+                <div className="menu-stat-label">Support & Maintenance</div>
+                <div className="menu-stat-value">24/<span>7</span></div>
               </div>
             </div>
 
