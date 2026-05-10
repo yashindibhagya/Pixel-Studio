@@ -10,6 +10,8 @@ const services = [
     description: 'Elevate your identity with sharp positioning, cohesive visuals, and interfaces that convert visitors into loyal users.',
     tags: ['Art Direction', 'Brand Strategy', 'Logo Design', 'Color Systems'],
     gradient: 'linear-gradient(135deg, #0088A3 0%, #1a0a06 60%, #0c0c0b 100%)',
+    image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageAlt: 'UI and UX design layouts across desktop and mobile screens',
   },
   {
     id: 'web-development',
@@ -18,6 +20,8 @@ const services = [
     description: 'Refresh or rebuild your web presence. High retention with pixel-perfect flows, micro‑interactions, and clean architecture.',
     tags: ['Clean & Modern UI', 'Rebranding', 'Design Systems', 'Prototyping'],
     gradient: 'linear-gradient(135deg, #38bdf8 0%, #0c1a2e 60%, #0c0c0b 100%)',
+    image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageAlt: 'Modern marketing website with bold hero and clean layouts',
   },
   {
     id: 'mobile-development',
@@ -26,6 +30,8 @@ const services = [
     description: 'Launch a revenue‑driving app that captures qualified leads 24/7 — designed, developed, and shipped in 14 days or less.',
     tags: ['React Native', 'Integrations', 'CMS', 'Animation'],
     gradient: 'linear-gradient(135deg, #a78bfa 0%, #1a0c2e 60%, #0c0c0b 100%)',
+    image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    imageAlt: 'Mobile app interface with analytics and messaging screens',
   },
 ]
 
@@ -378,11 +384,17 @@ export function Services() {
               </div>
 
               <div className="sv-card-media">
+                <img
+                  src={service.image}
+                  alt={service.imageAlt}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
                 <div
                   className="sv-card-media-bg"
                   style={{ background: service.gradient }}
+                  aria-hidden
                 />
-                <span className="sv-card-media-label">Dummy image</span>
+                <span className="sv-card-media-label">Selected work</span>
               </div>
 
               <div className="sv-card-body">

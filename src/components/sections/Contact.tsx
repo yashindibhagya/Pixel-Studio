@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import emailjs from '@emailjs/browser'
 import { useCursorHover } from '@/components/Cursor'
 
 const contactMethods = [
@@ -36,63 +35,31 @@ export function Contact() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-
-    if (!publicKey || !serviceId || !templateId) {
-      setStatus('error')
-      setErrorMessage('Email is not configured. Please add EmailJS keys to .env.local.')
-      return
-    }
-
     setStatus('sending')
     setErrorMessage('')
 
-    const safeName = String(name).trim() || '(no name)'
-    const safeEmail = String(email).trim() || '(not provided)'
-    const safeWebsite = String(website).trim() || '(not provided)'
-    const safePricing = String(pricingModel).trim() || 'Other'
-    const safeMessage = String(message)
-
-    const content = [
-      'New contact form message',
-      '',
-      `From: ${safeName} (${safeEmail})`,
-      `Website: ${safeWebsite}`,
-      `Pricing interest: ${safePricing}`,
-      '',
-      'Message:',
-      safeMessage || '(no message)',
-    ].join('\n')
-
-    const templateParams: Record<string, string> = {
-      title: 'New contact form message',
-      from_name: safeName,
-      from_email: safeEmail,
-      website: safeWebsite,
-      pricing_model: safePricing,
-      message: safeMessage || '(no message)',
-      name: safeName,
-      email: safeEmail,
-      content,
-    }
-
     try {
-      await emailjs.send(serviceId as string, templateId as string, templateParams, publicKey as string)
-      // Do NOT clear fields – keep the form as-is
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from_name: name.trim() || '(no name)',
+          from_email: email.trim(),
+          website: website.trim() || '(not provided)',
+          pricing_model: pricingModel,
+          message: message.trim() || '(no message)',
+        }),
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to send message.')
+      }
+
       setStatus('success')
     } catch (err: unknown) {
       setStatus('error')
-      const msg =
-        err && typeof err === 'object' && 'text' in err
-          ? String((err as { text: string }).text)
-          : err instanceof Error
-            ? err.message
-            : 'Something went wrong while sending your message. Please email us directly.'
-      setErrorMessage(msg)
-      console.error('EmailJS error:', err)
+      setErrorMessage(err instanceof Error ? err.message : 'Something went wrong. Please email us directly.')
     }
   }
 
@@ -586,10 +553,7 @@ export function Contact() {
             <form className="ct-form" onSubmit={handleSubmit}>
               {status === 'success' && (
                 <p className="ct-form-feedback ct-form-feedback-success">
-                  Our contact form is currently under maintenance. Please email your project
-                  details to <span className="ct-method-value">infodevoralabs@gmail.com</span>.
-                  Your input has been kept in the form, so you can copy and paste it into your
-                  email.
+                  Message sent! We&apos;ll get back to you within one business day.
                 </p>
               )}
               {status === 'error' && (

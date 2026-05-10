@@ -1212,6 +1212,235 @@ section {
   transform: translate(2px, -2px);
 }
 
+/* CASE STUDY PAGE */
+.case-page {
+  background: #F8F6FC;
+  color: #18130c;
+  padding: 8rem 0 6rem;
+}
+
+.case-page--theme-aqua {
+  background: radial-gradient(circle at 0% 0%, rgba(0, 136, 163, 0.08), transparent 55%), #f8f6fc;
+}
+
+.case-page--theme-coral {
+  background: radial-gradient(circle at 100% 0%, rgba(255, 107, 61, 0.08), transparent 55%), #f8f6fc;
+}
+
+.case-page--theme-violet {
+  background: radial-gradient(circle at 100% 100%, rgba(107, 0, 184, 0.08), transparent 55%), #f8f6fc;
+}
+
+.case-page-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 4vw;
+}
+
+.case-page-header {
+  border-bottom: 1px solid rgba(12, 2, 26, 0.08);
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.case-page-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 3rem;
+}
+
+.case-page-hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.case-page-kicker {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(12, 2, 26, 0.6);
+  margin-bottom: 1.1rem;
+}
+
+.case-page-index {
+  opacity: 0.6;
+}
+
+.case-page-title {
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin: 0 0 0.75rem;
+}
+
+.case-page-summary {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.9;
+  color: rgba(12, 2, 26, 0.6);
+  max-width: 32rem;
+}
+
+.case-page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.case-page-meta-label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(12, 2, 26, 0.45);
+  margin-bottom: 0.25rem;
+}
+
+.case-page-meta-value {
+  font-size: 0.95rem;
+}
+
+.case-page-media {
+  position: relative;
+  min-height: 260px;
+}
+
+.case-page-media-orbit {
+  position: absolute;
+  inset: 8%;
+  border-radius: 32px;
+  border: 1px dashed rgba(12, 2, 26, 0.16);
+  opacity: 0.7;
+}
+
+.case-page-media-card {
+  position: relative;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.6), transparent 70%),
+    linear-gradient(135deg, #111827, #020617);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.6);
+}
+
+.case-page-media-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(0, 229, 255, 0.35), transparent 60%),
+    radial-gradient(circle at 85% 100%, rgba(189, 0, 255, 0.25), transparent 60%);
+  opacity: 0.9;
+}
+
+.case-page-media-img {
+  object-fit: cover;
+  mix-blend-mode: screen;
+}
+
+.case-page-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.case-page-section h2,
+.case-page-section h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.case-page-section p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(12, 2, 26, 0.75);
+}
+
+.case-page-section ul {
+  padding-left: 1.1rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(12, 2, 26, 0.8);
+}
+
+.case-page-section.two-column {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.case-page-footer {
+  margin-top: 3.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(12, 2, 26, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.case-page-back {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(12, 2, 26, 0.7);
+  text-decoration: none;
+}
+
+.case-page-back:hover {
+  text-decoration: underline;
+}
+
+.case-page-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 2px;
+  background: #0088a3;
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.case-page-cta:hover {
+  background: #ff6b3d;
+}
+
+@media (max-width: 768px) {
+  .case-page {
+    padding-top: 7rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .case-page-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .case-page-media {
+    min-height: 220px;
+  }
+
+  .case-page-section.two-column {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* TESTIMONIALS */
 .testimonials-section {
   background: var(--black);

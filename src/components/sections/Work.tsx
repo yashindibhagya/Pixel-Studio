@@ -1,30 +1,12 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useCursorHover } from '@/components/Cursor'
-
-const projects = [
-  {
-    id: 'nova',
-    label: 'Fintech · Web App',
-    title: 'NovaPay Financial Platform',
-    summary: 'Redesigned dashboard and flows that increased paid conversions by 37%.',
-  },
-  {
-    id: 'flux',
-    label: 'Health · Mobile',
-    title: 'Flux Fitness Tracker',
-    summary: 'A mobile experience that keeps users returning every day to close their rings.',
-  },
-  {
-    id: 'terrain',
-    label: 'E‑Commerce · Retail',
-    title: 'Terrain Outdoor Storefront',
-    summary: 'Modern, conversion‑focused storefront that boosted average order value.',
-  },
-]
+import { projects } from '@/data/projects'
 
 export function Work() {
   const hover = useCursorHover()
+  const router = useRouter()
 
   const styles = `
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap');
@@ -381,7 +363,12 @@ export function Work() {
         {/* ── PROJECT LIST ── */}
         <div className="wk-grid">
           {projects.map((project, i) => (
-            <article key={project.id} className="case-card" {...hover}>
+          <article
+            key={project.id}
+            className="case-card"
+            {...hover}
+            onClick={() => router.push(`/work/${project.id}`)}
+          >
 
               <div className="case-media-strip" />
 
@@ -396,7 +383,14 @@ export function Work() {
               </div>
 
               <div className="case-right">
-                <button className="case-link" type="button">
+                <button
+                  className="case-link"
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    router.push(`/work/${project.id}`)
+                  }}
+                >
                   <span>View case</span>
                   <span className="case-link-icon">↗</span>
                 </button>
