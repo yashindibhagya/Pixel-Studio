@@ -14,12 +14,12 @@ const contactMethods = [
   {
     id: 'phone',
     label: 'Call us',
-    value: '+359-887-779',
+    value: '+94 760 244 531',
     icon: '☎',
   },
 ]
 
-const pricingOptions = ['Design retainer', 'Single project', 'Brand identity', 'Other']
+const pricingOptions = ['UI/UX Design', 'Web Development', 'Mobile Development', 'Other']
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 

@@ -18,8 +18,7 @@ export const projects: Project[] = [
     id: 'mawprint-dashboard',
     label: 'Print Industry · Web App',
     title: 'MawPrint Work Dashboard',
-    summary: 'A custom operations dashboard for the MawPrint team to manage orders, jobs, and client work in one place.',
-    url: 'https://formdesk-mawprint.vercel.app/',
+    summary: 'A custom operations dashboard for the MawPrint team to manage orders, jobs, and client work in one place.'
   },
   {
     id: 'terrain',

@@ -15,11 +15,11 @@ const projectImages: Record<
   }
 > = {
   mawprint: {
-    src: 'https://images.pexels.com/photos/6444/pencil-typography-black-design.jpg?auto=compress&cs=tinysrgb&w=1600',
-    alt: 'MawPrint brand and web design',
+    src: '/mawprint.png',
+    alt: 'MawPrint website homepage — Creative-Driven Sublimation Printing & Branding Solutions Company',
   },
   'mawprint-dashboard': {
-    src: 'https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    src: '/dashboard.png',
     alt: 'MawPrint operations dashboard interface',
   },
   terrain: {
