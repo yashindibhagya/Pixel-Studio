@@ -9,7 +9,7 @@ const services = [
     title: 'UI/UX Design',
     description: 'Elevate your identity with sharp positioning, cohesive visuals, and interfaces that convert visitors into loyal users.',
     tags: ['Art Direction', 'Brand Strategy', 'Logo Design', 'Color Systems'],
-    gradient: 'linear-gradient(135deg, #0088A3 0%, #1a0a06 60%, #0c0c0b 100%)',
+    gradient: 'linear-gradient(135deg, #0088A3 0%, #0C021A 100%)',
     image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200',
     imageAlt: 'UI and UX design layouts across desktop and mobile screens',
   },
@@ -19,7 +19,7 @@ const services = [
     title: 'Web Development',
     description: 'Refresh or rebuild your web presence. High retention with pixel-perfect flows, micro‑interactions, and clean architecture.',
     tags: ['Clean & Modern UI', 'Rebranding', 'Design Systems', 'Prototyping'],
-    gradient: 'linear-gradient(135deg, #38bdf8 0%, #0c1a2e 60%, #0c0c0b 100%)',
+    gradient: 'linear-gradient(135deg, #00b4d8 0%, #0088A3 50%, #0C021A 100%)',
     image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1200',
     imageAlt: 'Modern marketing website with bold hero and clean layouts',
   },
@@ -29,7 +29,7 @@ const services = [
     title: 'Mobile Development',
     description: 'Launch a revenue‑driving app that captures qualified leads 24/7 — designed, developed, and shipped in 14 days or less.',
     tags: ['React Native', 'Integrations', 'CMS', 'Animation'],
-    gradient: 'linear-gradient(135deg, #a78bfa 0%, #1a0c2e 60%, #0c0c0b 100%)',
+    gradient: 'linear-gradient(135deg, #0C021A 0%, #0088A3 100%)',
     image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200',
     imageAlt: 'Mobile app interface with analytics and messaging screens',
   },
@@ -131,40 +131,28 @@ export function Services() {
       align-self: end;
     }
 
-    /* ── GRID ── (same background as Work section) */
+    /* ── GRID ── */
     .sv-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
-      background: var(--sv-bg);
+      background: var(--sv-border);
       border: 1px solid var(--sv-border);
     }
 
-    /* ── CARD ── (same hover as Work: fill from bottom + left strip) */
+    /* ── CARD ── */
     .sv-card {
-      background: transparent;
+      background: var(--sv-bg);
       display: flex;
       flex-direction: column;
-      transition: background 0.3s;
       cursor: default;
       position: relative;
       overflow: hidden;
+      transition: background 0.35s;
     }
+    .sv-card:hover { background: #ffffff; }
 
-    /* white fill from bottom on hover */
-    .sv-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: #ffffff;
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
-      z-index: 0;
-    }
-    .sv-card:hover::before { transform: scaleY(1); }
-
-    /* left accent bar (same as Work) */
+    /* left accent bar */
     .sv-card-strip {
       position: absolute;
       top: 0; left: 0;
@@ -175,6 +163,22 @@ export function Services() {
     }
     .sv-card:hover .sv-card-strip { height: 100%; }
 
+    /* gradient orb — decorative bg element */
+    .sv-card-orb {
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      opacity: 0.12;
+      transition: opacity 0.4s, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .sv-card:hover .sv-card-orb {
+      opacity: 0.18;
+      transform: scale(1.1);
+    }
+
     /* top meta row */
     .sv-card-meta {
       position: relative;
@@ -182,7 +186,7 @@ export function Services() {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 24px 0;
+      padding: 28px 28px 0;
     }
     .sv-card-num {
       font-family: 'DM Mono', monospace;
@@ -207,69 +211,66 @@ export function Services() {
       transform: rotate(45deg);
     }
 
-    /* image */
-    .sv-card-media {
+    /* large decorative number */
+    .sv-card-bignum {
       position: relative;
       z-index: 1;
-      margin: 18px 24px 0;
-      border-radius: 10px;
-      overflow: hidden;
-      height: 200px;
-      flex-shrink: 0;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(4rem, 6vw, 6.5rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--sv-border);
+      padding: 20px 28px 0;
+      transition: -webkit-text-stroke-color 0.3s;
+      user-select: none;
     }
-    .sv-card-media-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
-    }
-    .sv-card:hover .sv-card-media-bg { transform: scale(1.04); }
-    .sv-card-media-label {
-      position: absolute;
-      left: 12px; bottom: 12px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.72);
-      color: rgba(249,250,251,0.8);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid rgba(156,163,175,0.35);
-      backdrop-filter: blur(6px);
+    .sv-card:hover .sv-card-bignum {
+      -webkit-text-stroke-color: rgba(0,136,163,0.2);
     }
 
     /* content */
     .sv-card-body {
       position: relative;
       z-index: 1;
-      padding: 20px 24px 24px;
+      padding: 16px 28px 28px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
     .sv-card-title {
-      font-size: clamp(1.3rem, 2vw, 1.65rem);
+      font-size: clamp(1.35rem, 2vw, 1.7rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.1;
       color: var(--sv-ink);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       transition: color 0.3s;
     }
     .sv-card:hover .sv-card-title { color: #0c0c0b; }
     .sv-card-desc {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
-      line-height: 1.8;
+      line-height: 1.85;
       color: var(--sv-muted);
       font-weight: 300;
       flex: 1;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       transition: color 0.3s;
     }
     .sv-card:hover .sv-card-desc { color: rgba(12,12,11,0.55); }
+
+    /* accent rule */
+    .sv-card-rule {
+      width: 32px;
+      height: 2px;
+      background: var(--sv-accent);
+      margin-bottom: 20px;
+      opacity: 0.5;
+      transition: width 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+    }
+    .sv-card:hover .sv-card-rule { width: 56px; opacity: 1; }
 
     /* tags */
     .sv-tags {
@@ -292,7 +293,7 @@ export function Services() {
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--sv-muted);
-      transition: border-color 0.2s, color 0.2s;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
       white-space: nowrap;
     }
     .sv-card:hover .sv-tag {
@@ -340,15 +341,13 @@ export function Services() {
     @media (max-width: 1024px) {
       .sv-grid { grid-template-columns: 1fr; }
       .sv-header { grid-template-columns: 1fr; gap: 20px; }
-      .sv-card-media { height: 260px; }
     }
     @media (max-width: 640px) {
       .sv-section { padding-bottom: 80px; }
       .sv-header { padding: 60px 0 40px; margin-bottom: 40px; }
       .sv-title { font-size: 2.8rem; }
-      .sv-card-media { height: 200px; }
       .sv-card-meta, .sv-card-body { padding-left: 18px; padding-right: 18px; }
-      .sv-card-media { margin-left: 18px; margin-right: 18px; }
+      .sv-card-bignum { padding-left: 18px; padding-right: 18px; }
     }
   `
 
@@ -378,27 +377,23 @@ export function Services() {
             <article key={service.id} className="sv-card" {...hover}>
               <div className="sv-card-strip" aria-hidden />
 
+              {/* decorative gradient orb */}
+              <div
+                className="sv-card-orb"
+                style={{ background: service.gradient }}
+                aria-hidden
+              />
+
               <div className="sv-card-meta">
                 <span className="sv-card-num">{service.num} /</span>
                 <span className="sv-card-arrow">↗</span>
               </div>
 
-              <div className="sv-card-media">
-                <img
-                  src={service.image}
-                  alt={service.imageAlt}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
-                <div
-                  className="sv-card-media-bg"
-                  style={{ background: service.gradient }}
-                  aria-hidden
-                />
-                <span className="sv-card-media-label">Selected work</span>
-              </div>
+              <div className="sv-card-bignum" aria-hidden>{service.num}</div>
 
               <div className="sv-card-body">
                 <h3 className="sv-card-title">{service.title}</h3>
+                <div className="sv-card-rule" />
                 <p className="sv-card-desc">{service.description}</p>
                 <div className="sv-tags">
                   {service.tags.map((tag) => (
@@ -415,8 +410,8 @@ export function Services() {
         {/* ── FOOTER ── */}
         <div className="sv-footer">
           <span className="sv-footer-note">All services available on a flat monthly subscription</span>
-          <a href="#pricing" className="sv-footer-cta">
-            See Pricing ↗
+          <a href="#contact" className="sv-footer-cta">
+            Contact Us ↗
           </a>
         </div>
 
